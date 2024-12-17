@@ -21,23 +21,22 @@
                         alt="Your Company">
             
                     <!-- Courses Menu -->
+                    <div class="hidden sm:flex space-x-4">
                     <a href="/courses"
-                        class="{{ request()->is('courses') ? 'text-white' : 'text-gray-300 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium"
+                        class="{{ request()->is('courses') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium"
                         aria-current="page">Courses</a>
-                </div>
-            
-                <!-- Menu Navigasi Utama -->
-                <div class="hidden sm:flex space-x-4">
+                
                     <a href="/students"
-                        class="{{ request()->is('students') ? 'text-white' : 'text-gray-300 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">
+                        class="{{ request()->is('students') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">
                         Students
                     </a>
             
                     <a href="/approved"
-                        class="{{ request()->is('approved') ? 'text-white' : 'text-gray-300 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">
+                        class="{{ request()->is('approved') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">
                         Approved
                     </a>
                 </div>
+            </div>
             
                 <!-- Profile Button -->
                 <div class="ml-auto relative flex items-center">
