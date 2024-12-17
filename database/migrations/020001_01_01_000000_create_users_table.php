@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('user_nim', 100);
 
 
-            $table->foreignId('role_id')->constrained(
+            $table->foreignId('role_id')->default(1)->constrained(
                 'roles',
                 'role_id'
             );
