@@ -19,9 +19,6 @@ Route::get('/approved', [MataKuliahAcceptController::class, 'index'])->name('app
 
 Route::get('/approved/{id}/students', [MataKuliahAcceptController::class, 'showAcceptedStudents'])->name('course.details');
 
-Route::get('/acc', function () {
-    return view('studentPrev');
-});
 Route::get('/home', function () {
     return view('home');
 })->name('home');
