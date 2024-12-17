@@ -14,12 +14,6 @@ class KelasMataKuliahSeeder extends Seeder
      */
     public function run(): void
     {
-        // Ensure there are MataKuliahDosen records available
-        if (MataKuliahDosen::count() === 0) {
-            $this->command->info('No MataKuliahDosen records found. Please seed MataKuliahDosen first.');
-            return;
-        }
-
         // Create 10 KelasMataKuliah entries
         KelasMataKuliah::factory()->count(10)->create();
     }

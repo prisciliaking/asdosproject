@@ -2,84 +2,83 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;  // Add this line to use Auth
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    // Menampilkan semua data user
-    public function index()
+    public function viewUsers()
     {
-        $users = User::all();
-        return response()->json($users);
+        $users = User::with('role')->get();
+        return view('view-users', compact('users'));
     }
 
-    // Menampilkan data user berdasarkan ID
-    public function show($id)
+    public function showLoginRegisterForm()
     {
-        $user = User::find($id);
+        return view('login');
+    }
+
+    //login
+    public function login(Request $request)
+    {
+        // Validate the input fields
+        $request->validate([
+            'user_email' => 'required|email',
+            'user_nim' => 'required|string',
+        ]);
+
+        // Attempt to find the user by email and NIM
+        $user = User::where('user_email', $request->user_email)
+            ->where('user_nim', $request->user_nim)
+            ->first();
 
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            // Return an error message if user is not found
+            return redirect()->back()->with('error', 'Email or NIM Incorrect!');
         }
 
-        return response()->json($user);
+        //simpen name e user
+        session(['user_name' => $user->user_name]);
+
+        // Redirect to the home page after successful login
+        return redirect()->route('home')->with('message', 'Login successful!');
     }
 
-    // Menambahkan data user baru
-    public function store(Request $request)
+    public function logout(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'user_name' => 'required|string|max:255',
+        // Clear user session data
+        $request->session()->forget('user_name');
+
+        // Redirect to login page
+        return redirect()->route('login')->with('message', 'You have been logged out.');
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('register');
+    }
+    //register
+    public function register(Request $request)
+    {
+        // Validate the input fields
+        $request->validate([
+            'user_name' => 'required|string|max:255,user_name',
             'user_email' => 'required|email|unique:users,user_email',
             'user_nim' => 'required|string|unique:users,user_nim',
+
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-        $user = User::create($request->only(['user_name', 'user_email', 'user_nim']));
-
-        return response()->json(['message' => 'User created successfully', 'data' => $user], 201);
-    }
-
-    // Mengupdate data user berdasarkan ID
-    public function update(Request $request, $id)
-    {
-        $user = User::find($id);
-
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
-        }
-
-        $validator = Validator::make($request->all(), [
-            'user_name' => 'sometimes|string|max:255',
-            'user_email' => 'sometimes|email|unique:users,user_email,' . $id . ',user_id',
-            'user_nim' => 'sometimes|string|unique:users,user_nim,' . $id . ',user_id',
+        // Create and save the new user
+        User::create([
+            'user_name' => $request->user_name,
+            'user_email' => $request->user_email,
+            'user_nim' => $request->user_nim,
+            'role_id' => 1 //mahasiswa
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-        $user->update($request->only(['user_name', 'user_email', 'user_nim']));
-
-        return response()->json(['message' => 'User updated successfully', 'data' => $user]);
-    }
-
-    // Menghapus data user
-    public function destroy($id)
-    {
-        $user = User::find($id);
-
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
-        }
-
-        $user->delete();
-
-        return response()->json(['message' => 'User deleted successfully']);
+        // Redirect with a success message
+        return redirect()->route('login')->with('message', 'Registration successful! Please log in.');
     }
 }
