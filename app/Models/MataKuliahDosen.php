@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class MataKuliahDosen extends Model
 {
-    use HasFactory;
+    protected $table = 'mata_kuliah_dosens'; // Plural table name
+    protected $primaryKey = 'matkul_dosen_id'; // Explicit primary key
     public $timestamps = false;
-    protected $primaryKey = 'matkul_dosen_id';
 
     protected $fillable = [
         'dosen_id',
@@ -22,7 +23,7 @@ class MataKuliahDosen extends Model
     }
  
     public function mataKuliah()
-    {
+    {   
         return $this->belongsTo(MataKuliah::class, 'mata_kuliah_id', 'mata_kuliah_id');
     }
 }

@@ -8,9 +8,7 @@ use App\Models\MataKuliahAccept;
 
 Route::get('/courses', [KelasMataKuliahController::class, 'index'])->name('courses.index');
 
-Route::get('/addcourse', function () {
-    return view('addCourse');
-});
+Route::get('/addcourse', function () { return view('addCourse'); });
 
 Route::get('/approved', [MataKuliahAcceptController::class, 'index'])->name('approved.index');
 
