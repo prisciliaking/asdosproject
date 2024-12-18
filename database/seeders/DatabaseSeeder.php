@@ -9,12 +9,9 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // First, seed the roles
+        // seed role e
         $this->call(RoleSeeder::class);
 
         // Seed the users and associate them with roles
@@ -49,5 +46,8 @@ class DatabaseSeeder extends Seeder
 
         //seed nama dosen
         $this->call(MataKuliahDosenSeeder::class);
+
+        //seed kelas e
+        $this->call(KelasMataKuliahSeeder::class);
     }
 }

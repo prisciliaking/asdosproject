@@ -9,9 +9,6 @@ use Illuminate\Database\Seeder;
 
 class MataKuliahAcceptSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
          // Get all mata_kuliah_pilihans with 'approve' status

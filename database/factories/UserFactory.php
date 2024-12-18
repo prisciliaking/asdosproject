@@ -18,8 +18,8 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        // Get the 'mahasiswa' and 'admin' roles by name
-        $roles = Role::whereIn('role_name', ['mahasiswa', 'admin'])->get();
+        // Get the 'mahasiswa'by id
+        $roles = User::where('role_id', 1)->with('role')->get();
 
         // Check if roles are available
         if ($roles->isEmpty()) {
@@ -32,7 +32,7 @@ class UserFactory extends Factory
         return [
             'user_name' => $this->faker->name(),
             'user_email' => $this->faker->unique()->safeEmail(),
-            'user_nim' => $this->faker->unique()->numerify('NIM-####'),
+            'user_nim' => $this->faker->unique()->numerify('0-####'),
             'role_id' => $role->role_id,  // Assign the selected role ID
         ];
     }

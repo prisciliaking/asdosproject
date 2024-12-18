@@ -14,18 +14,52 @@
         <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div class="relative flex h-16 items-center justify-between">
 
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <img class="h-10 w-auto"
-                        src="https://1.bp.blogspot.com/-emQ1ckCOpio/YLZG9eE_XII/AAAAAAAAFNI/hPk8UF707xo7PgDTeKXc7dkA5g6hhGBtACLcBGAsYHQ/w1200-h630-p-k-no-nu/Logo%2BUniversitas%2BCiputra.png"
-                        alt="Your Company">
-                </div>
+                <!-- Conditional Navigation: Based on Role -->
+                @if (session('role_id') == 2)
+                    <!-- ADMIN Navigation -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Logo -->
+                        <img class="h-10 w-auto"
+                            src="https://1.bp.blogspot.com/-emQ1ckCOpio/YLZG9eE_XII/AAAAAAAAFNI/hPk8UF707xo7PgDTeKXc7dkA5g6hhGBtACLcBGAsYHQ/w1200-h630-p-k-no-nu/Logo%2BUniversitas%2BCiputra.png"
+                            alt="Your Company">
 
-                <!-- User Name and Profile -->
-                <div class="relative flex items-center space-x-4">
+                        <!-- Admin-Specific Menu -->
+                        <div class="hidden sm:flex space-x-4">
+                            <a href="/courses"
+                                class="{{ request()->is('courses') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Courses</a>
+                            <a href="{{ route('users') }}"
+                                class="{{ request()->is('users') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Students</a>
+                            <a href="/approved"
+                                class="{{ request()->is('approved') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Approved</a>
+                        </div>
+                    </div>
+                @else
+                    <!-- BASIC Navigation for Mahasiswa -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Logo -->
+                        <a href="{{ route('home') }}">
+                            <img class="h-10 w-auto"
+                                src="https://1.bp.blogspot.com/-emQ1ckCOpio/YLZG9eE_XII/AAAAAAAAFNI/hPk8UF707xo7PgDTeKXc7dkA5g6hhGBtACLcBGAsYHQ/w1200-h630-p-k-no-nu/Logo%2BUniversitas%2BCiputra.png"
+                                alt="Your Company">
+                        </a>
+                        <!-- Mahasiswa Menu -->
+                        @if (session('role_id') == 1)
+                            <div class="hidden sm:flex space-x-4">
+                                <!-- Accepted Courses Menu -->
+                                <a href="{{ route('user.acceptedCourses') }}"
+                                    class="{{ request()->is('user/accepted-courses') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">
+                                    Accepted Courses
+                                </a>
+                            </div>
+                        @endif
+                    </div>
 
+                @endif
+
+                <!-- User Greeting and Profile Section -->
+                <div class="ml-auto relative flex items-center space-x-4">
                     @if (session('user_name'))
-                        <span class="text-white text-lg font-semibold">Hello, {{ session('user_name') }}!</span>
+                        <span class="text-white text-lg font-semibold mr-4">Hello, {{ session('user_name') }}!</span>
                     @endif
 
                     <!-- Profile Button -->
@@ -39,22 +73,20 @@
                                 alt="Profile Picture">
                         </button>
 
-                        <!-- Dropdown menu -->
+                        <!-- Dropdown Menu -->
                         <div id="dropdown-menu"
                             class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem">Your
-                                Profile</a>
+                            {{-- <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem">Your Profile</a> --}}
                             <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700"
                                 role="menuitem">Sign out</a>
                         </div>
                     </div>
                 </div>
-
             </div>
-
     </nav>
 
+    <!-- Dropdown Toggle Script -->
     <script>
         // Menampilkan/menghilangkan dropdown menu
         const userMenuButton = document.getElementById('user-menu-button');

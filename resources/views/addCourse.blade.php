@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <x-navigationAdmin></x-navigationAdmin>
+    <x-navigation></x-navigation>
     <!-- Form Section -->
   <div class="mx-auto bg-white p-8 rounded-lg ">
     <h2 class="text-2xl font-bold mb-6">Add New Course</h2>

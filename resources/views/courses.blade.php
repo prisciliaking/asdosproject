@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <x-navigationAdmin></x-navigationAdmin>
+    <x-navigation></x-navigation>
     <main>
         <!-- Main Content -->
         <div class="mx-auto p-6">

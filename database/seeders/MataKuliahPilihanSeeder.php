@@ -10,9 +10,6 @@ use Illuminate\Database\Seeder;
 
 class MataKuliahPilihanSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
        // Get all mata kuliahs

@@ -23,12 +23,8 @@ return new class extends Migration
                 'mata_kuliahs',
                 'mata_kuliah_id'
             );
-
-            // Add a unique constraint to prevent duplicate entries for the same user and mata_kuliah
-            $table->unique(['user_id', 'mata_kuliah_id']);
         });
     }
-
 
     /**
      * Reverse the migrations.

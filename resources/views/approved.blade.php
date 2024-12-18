@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <x-navigationAdmin></x-navigationAdmin>
+    <x-navigation></x-navigation>
     <main>
         <!-- Main Content -->
         <div class="mx-auto p-6">
@@ -21,16 +21,15 @@
                 <div class="p-10 course-card bg-orange-100 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105"
                     data-semester="{{ $course->kelas_semester }}">
                     <a href="{{ route('course.details', ['id' => $course->kelas_id]) }}" class="block">
-                        <h3 class="text-lg font-bold text-gray-900">{{ $course->kelas_nama }}</h3>
-                        <p class="text-gray-800">Day: {{ $course->mata_kuliah_hari }}</p>
-                        <p class="text-gray-800">Time: {{ $course->mata_kuliah_jam }}</p>
-                        <p class="text-gray-800">Lecturer:
-                            {{ $course->mataKuliahDosen->dosen->dosen_name ?? 'N/A' }}</p>
+                        <h3 class="text-lg font-bold text-gray-900">{{ $course->kelas_nama ?? 'N/A'  }}</h3>
+                        <p class="text-gray-800">Day: {{ $course->mata_kuliah_hari ?? 'N/A' }}</p>
+                        <p class="text-gray-800">Time: {{ $course->mata_kuliah_jam ?? 'N/A' }}</p>
+                        <p class="text-gray-800">Lecturer: {{ $course->mataKuliahDosen->dosen->dosen_name ?? 'N/A' }}</p>
         
                         <!-- Flexbox Container -->
                         <div class="flex items-center justify-center mt-2 space-x-1">
                             <span class="text-gray-800 font-medium">Group Link:</span>
-                            <a class="text-blue-500 underline" href="{{ $course->whats_app_link }}"
+                            <a class="text-blue-500 underline" href="{{ $course->whats_app_link ?? 'N/A' }}"
                                 target="_blank">Join Group</a>
                         </div>
                     </a>

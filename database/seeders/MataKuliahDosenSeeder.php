@@ -10,9 +10,6 @@ use Illuminate\Database\Seeder;
 
 class MataKuliahDosenSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         // Ensure there are MataKuliah and Dosen records available

@@ -8,9 +8,6 @@ use Illuminate\Database\Seeder;
 
 class MataKuliahSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         // Create 15 Mata Kuliah records using the factory

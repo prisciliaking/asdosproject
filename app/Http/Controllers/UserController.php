@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -8,16 +9,16 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    //
+    //view mahasiswa
     public function viewUsers()
     {
-        $users = User::with('role')->get();
+        $users = User::where('role_id', 1)->with('role')->get();
         return view('view-users', compact('users'));
     }
 
     public function showLoginRegisterForm()
     {
-        return view('login');
+        return view('login-register');
     }
 
     //login
@@ -32,6 +33,7 @@ class UserController extends Controller
         // Attempt to find the user by email and NIM
         $user = User::where('user_email', $request->user_email)
             ->where('user_nim', $request->user_nim)
+            ->with('role')
             ->first();
 
         if (!$user) {
@@ -39,8 +41,12 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Email or NIM Incorrect!');
         }
 
-        //simpen name e user
-        session(['user_name' => $user->user_name]);
+        //simpen name, nim, role_id e user
+        session([
+            'user_name' => $user->user_name,
+            'user_nim'  => $user->user_nim,
+            'role_id'   => $user->role->role_id ?? null, // Role ID from roles table
+        ]);
 
         // Redirect to the home page after successful login
         return redirect()->route('home')->with('message', 'Login successful!');
@@ -48,37 +54,37 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
-        // Clear user session data
-        $request->session()->forget('user_name');
+        // Clear all user session data
+        $request->session()->flush();
 
         // Redirect to login page
         return redirect()->route('login')->with('message', 'You have been logged out.');
     }
 
-    public function showRegistrationForm()
-    {
-        return view('register');
-    }
-    //register
-    public function register(Request $request)
-    {
-        // Validate the input fields
-        $request->validate([
-            'user_name' => 'required|string|max:255,user_name',
-            'user_email' => 'required|email|unique:users,user_email',
-            'user_nim' => 'required|string|unique:users,user_nim',
+    // public function showRegistrationForm()
+    // {
+    //     return view('register');
+    // }
+    // //register
+    // public function register(Request $request)
+    // {
+    //     // Validate the input fields
+    //     $request->validate([
+    //         'user_name' => 'required|string|max:255,user_name',
+    //         'user_email' => 'required|email|unique:users,user_email',
+    //         'user_nim' => 'required|string|unique:users,user_nim',
 
-        ]);
+    //     ]);
 
-        // Create and save the new user
-        User::create([
-            'user_name' => $request->user_name,
-            'user_email' => $request->user_email,
-            'user_nim' => $request->user_nim,
-            'role_id' => 1 //mahasiswa
-        ]);
+    //     // Create and save the new user
+    //     User::create([
+    //         'user_name' => $request->user_name,
+    //         'user_email' => $request->user_email,
+    //         'user_nim' => $request->user_nim,
+    //         'role_id' => 1 //mahasiswa
+    //     ]);
 
-        // Redirect with a success message
-        return redirect()->route('login')->with('message', 'Registration successful! Please log in.');
-    }
+    //     // Redirect with a success message
+    //     return redirect()->route('login')->with('message', 'Registration successful! Please log in.');
+    // }
 }

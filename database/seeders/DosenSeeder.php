@@ -8,9 +8,6 @@ use Illuminate\Database\Seeder;
 
 class DosenSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         Dosen::factory()->count(6)->create();

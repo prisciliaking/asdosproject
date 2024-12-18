@@ -4,30 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Users List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <x-navigation></x-navigation>
-<body class="">
-    <div class="container p-4 mt-5">
-        <h1 class="mb-4">Users List</h1>
-        <table class="table table-bordered">
-            <thead>
+<body>
+    <div class="container mx-auto p-4 mt-5">
+        <h1 class="mb-4 text-2xl font-bold">Users List</h1>
+        <table class="table-auto w-full border-collapse border border-gray-300">
+            <thead class="bg-gray-200">
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>NIM</th>
-                    <th>Role</th>
+                    <th class="border border-gray-300 px-4 py-2">ID</th>
+                    <th class="border border-gray-300 px-4 py-2">Name</th>
+                    <th class="border border-gray-300 px-4 py-2">Email</th>
+                    <th class="border border-gray-300 px-4 py-2">NIM</th>
+                    <th class="border border-gray-300 px-4 py-2">Role</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                    <tr>
-                        <td>{{ $user->user_id }}</td>
-                        <td>{{ $user->user_name }}</td>
-                        <td>{{ $user->user_email }}</td>
-                        <td>{{ $user->user_nim }}</td>
-                        <td>{{ $user->role['role_name'] ?? 'No Role Assigned' }}</td>
+                    <tr class="text-center">
+                        <td class="border border-gray-300 px-4 py-2">{{ $user->user_id }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ $user->user_name }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ $user->user_email }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ $user->user_nim }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ $user->role['role_name'] ?? 'Mahasiswa' }}</td>
                     </tr>
                 @endforeach
             </tbody>

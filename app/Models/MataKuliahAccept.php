@@ -20,13 +20,10 @@ class MataKuliahAccept extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
-    // public function mataKuliah()
-    // {
-    //     return $this->belongsTo(MataKuliah::class, 'mata_kuliah_id', 'mata_kuliah_id');
-    // }
 
     public function mataKuliah()
     {
-        return $this->belongsTo(KelasMataKuliah::class, 'mata_kuliah_id', 'kelas_id');
+        return $this->belongsTo(KelasMataKuliah::class, 'mata_kuliah_id', 'kelas_id')
+            ->with('mataKuliahDosen.dosen'); // Include relationships with MataKuliahDosen and Dosen
     }
 }
