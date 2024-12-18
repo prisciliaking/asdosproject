@@ -13,7 +13,7 @@ public function run(): void{
         UserSeeder::class,
         MataKuliahSeeder::class,
         DosenSeeder::class,
-        MataKuliahDosen::class,
+        MataKuliahDosenSeeder::class,
         KelasMataKuliahSeeder::class,
         MataKuliahPilihanSeeder::class,
         MataKuliahAcceptSeeder::class

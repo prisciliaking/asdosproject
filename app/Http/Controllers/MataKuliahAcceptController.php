@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class MataKuliahAcceptController extends Controller
 {
-    /**
-     * Display a listing of accepted students.
-     *
-     * @return \Illuminate\View\View
-     */
     public function index()
     {
         // Get all the courses and their associated data (dosen)
