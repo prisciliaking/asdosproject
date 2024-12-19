@@ -25,10 +25,10 @@
                 @forelse ($users as $user)
                     <tr class="text-center">
                         <td class="border border-gray-300 px-4 py-2">{{ $loop->iteration }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $user->user_name }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $user->user_email }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $user->user_nim }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $user->role->role_name ?? 'Admin' }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ $user ->user_name }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ $user ->user_email }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ $user ->user_nim }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ $user ->role->role_name ?? 'Admin' }}</td>
                     </tr>
                 @empty
                     <tr>
