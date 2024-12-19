@@ -15,27 +15,29 @@
         <!-- Main Content -->
         <div class="mx-auto p-6">
             <!-- Header -->
-                <h1 class="mb-4 text-2xl font-bold">Courses</h1>
-                <!-- Dropdown: Default placeholder with no selection -->
-                <select id="semesterFilter" class="border border-gray-300 rounded py-2 px-3 w-64 text-black">
-                    <option selected disabled>Semester</option>
-                    <option value="ganjil">Semester Ganjil</option>
-                    <option value="genap">Semester Genap</option>
-                </select>
-            </div>
+            <h1 class="mb-4 text-2xl font-bold">Courses</h1>
+            <!-- Dropdown: Default placeholder with no selection -->
+            <select id="semesterFilter" class="border border-gray-300 rounded py-2 px-3 w-64 text-black">
+                <option selected disabled>Semester</option>
+                <option value="ganjil">Semester Ganjil</option>
+                <option value="genap">Semester Genap</option>
+            </select>
+        </div>
 
-            <!-- Course Grid -->
-            <div id="courseGrid" class="p-6 grid grid-cols-3 gap-y-10 gap-x-4 text-gray-700 text-center font-medium">
-                @foreach ($courses as $course)
-                    <div class="p-10 course-card bg-orange-100 rounded-lg shadow-md" data-semester="{{ $course->kelas_semester }}">
-                        <h3 class="text-lg font-bold">{{ $course->kelas_nama }}</h3>
-                        <p>Day: {{ $course->mata_kuliah_hari }}</p>
-                        <p>Time: {{ $course->mata_kuliah_jam }}</p>
-                        <p>Lecturer: {{ $course->mataKuliahDosen->dosen->dosen_name ?? 'N/A' }}</p>
-                        <p>Group Link: <a href="{{ $course->whats_app_link }}" target="_blank" class="text-blue-500 underline">Join Group</a></p>
-                    </div>
-                @endforeach
-            </div>
+        <!-- Course Grid -->
+        <div id="courseGrid" class="p-6 grid grid-cols-3 gap-y-10 gap-x-4 text-gray-700 text-center font-medium">
+            @foreach ($courses as $course)
+                <div class="p-10 course-card bg-orange-100 rounded-lg shadow-md"
+                    data-semester="{{ $course->kelas_semester }}">
+                    <h3 class="text-lg font-bold">{{ $course->kelas_nama }}</h3>
+                    <p>Day: {{ $course->mata_kuliah_hari }}</p>
+                    <p>Time: {{ $course->mata_kuliah_jam }}</p>
+                    <p>Lecturer: {{ $course->mataKuliahDosen->dosen->dosen_name ?? 'N/A' }}</p>
+                    <p>Group Link: <a href="{{ $course->whats_app_link }}" target="_blank"
+                            class="text-blue-500 underline">Join Group</a></p>
+                </div>
+            @endforeach
+        </div>
         </div>
 
         <!-- Floating Button -->
@@ -44,9 +46,9 @@
             <p class="text-2xl text-center">+</p>
         </button> --}}
     </main>
-
+    <x-footer></x-footer>
     <script>
-        document.getElementById('semesterFilter').addEventListener('change', function () {
+        document.getElementById('semesterFilter').addEventListener('change', function() {
             const selectedSemester = this.value;
             const courses = document.querySelectorAll('.course-card');
 

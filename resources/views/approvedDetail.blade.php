@@ -41,5 +41,6 @@
             </table>
         </div>
     </main>
+    <x-footer></x-footer>
 </body>
 </html>
