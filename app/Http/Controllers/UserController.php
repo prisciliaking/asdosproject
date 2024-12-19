@@ -34,14 +34,14 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Email or NIM Incorrect!');
         }
 
-        //simpen name, nim, role_id e user
+        //simpen name, nim, role_id e user 
         session([
             'user_name' => $user->user_name,
             'user_nim'  => $user->user_nim,
-            'role_id'   => $user->role->role_id ?? null, // Role ID from roles table
+            'role_id'   => $user->role->role_id,
         ]);
 
-        // Redirect to the home page after successful login
+        ///if login success, then will go to home
         return redirect()->route('home')->with('message', 'Login successful!');
     }
 
@@ -67,8 +67,8 @@ class UserController extends Controller
         $users = User::where('role_id', 2)->with('role')->get();
         return view('view-admins', compact('users'));
     }
-
-    // public function showRegistrationForm()
+}
+// public function showRegistrationForm()
     // {
     //     return view('register');
     // }
@@ -94,4 +94,3 @@ class UserController extends Controller
     //     // Redirect with a success message
     //     return redirect()->route('login')->with('message', 'Registration successful! Please log in.');
     // }
-}
