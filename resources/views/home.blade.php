@@ -20,5 +20,6 @@
             Get Started
         </a> --}}
     </main>
+    <x-footer></x-footer>
 </body>
 </html>
