@@ -16,12 +16,12 @@
     
     <main>
         <div class="mx-auto p-6">
-            <h2 class="text-2xl font-semibold mb-4">Accepted Students for {{ $course->kelas_nama }}</h2>
+            <h2 class="text-2xl font-semibold mb-4 ">Accepted Students for {{ $course->kelas_nama }}</h2>
 
             <!-- Students Table -->
             <table class="min-w-full table-auto border-collapse">
                 <thead>
-                    <tr>
+                    <tr class="bg-orange-100">
                         <th class="border px-4 py-2">No</th>
                         <th class="border px-4 py-2">Student Name</th>
                         <th class="border px-4 py-2">Student NIM</th>

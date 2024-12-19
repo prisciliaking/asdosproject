@@ -9,7 +9,21 @@ use Illuminate\Database\Seeder;
 
 class MataKuliahAcceptSeeder extends Seeder
 {
-    // public function run(): void
+    public function run(): void
+    {
+        // Get all mata_kuliah_pilihans with 'approve' status
+        $approvedPilihans = MataKuliahPilihan::where('pilihan_status', 'approve')->get();
+
+        foreach ($approvedPilihans as $pilihan) {
+            MataKuliahAccept::create([
+                'user_id' => $pilihan->user_id,
+                'mata_kuliah_id' => $pilihan->mata_kuliah_id,
+            ]);
+        }
+    }
+}
+
+// public function run(): void
     // {
     //     // Predefined Mata Kuliah Accept data
     //     $mataKuliahAccept = [
@@ -60,17 +74,3 @@ class MataKuliahAcceptSeeder extends Seeder
     //         );
     //     }
     // }
-    
-    public function run(): void
-    {
-         // Get all mata_kuliah_pilihans with 'approve' status
-         $approvedPilihans = MataKuliahPilihan::where('pilihan_status', 'approve')->get();
-
-         foreach ($approvedPilihans as $pilihan) {
-             MataKuliahAccept::create([
-                 'user_id' => $pilihan->user_id,
-                 'mata_kuliah_id' => $pilihan->mata_kuliah_id,
-             ]);
-         }
-    }
-}

@@ -18,26 +18,28 @@
                 @if (session('role_id') == 2)
                     <!-- ADMIN Navigation -->
                     <div class="flex items-center space-x-4">
-                        <!-- Logo -->
-                        <img class="h-10 w-auto"
-                            src="https://1.bp.blogspot.com/-emQ1ckCOpio/YLZG9eE_XII/AAAAAAAAFNI/hPk8UF707xo7PgDTeKXc7dkA5g6hhGBtACLcBGAsYHQ/w1200-h630-p-k-no-nu/Logo%2BUniversitas%2BCiputra.png"
-                            alt="Your Company">
-
+                        <a href="/home">
+                            <img class="h-10 w-auto"
+                                src="https://1.bp.blogspot.com/-emQ1ckCOpio/YLZG9eE_XII/AAAAAAAAFNI/hPk8UF707xo7PgDTeKXc7dkA5g6hhGBtACLcBGAsYHQ/w1200-h630-p-k-no-nu/Logo%2BUniversitas%2BCiputra.png"
+                                alt="Your Company">
+                        </a>
                         <!-- Admin-Specific Menu -->
                         <div class="hidden sm:flex space-x-4">
                             <a href="/courses"
                                 class="{{ request()->is('courses') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Courses</a>
-                            <a href="{{ route('users') }}"
+                            <a href="/users"
                                 class="{{ request()->is('users') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Students</a>
                             <a href="/approved"
                                 class="{{ request()->is('approved') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Approved</a>
+                            <a href="/admins"
+                                class="{{ request()->is('admins') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Admin</a>
                         </div>
                     </div>
                 @else
                     <!-- BASIC Navigation for Mahasiswa -->
                     <div class="flex items-center space-x-4">
                         <!-- Logo -->
-                        <a href="{{ route('home') }}">
+                        <a href="/home">
                             <img class="h-10 w-auto"
                                 src="https://1.bp.blogspot.com/-emQ1ckCOpio/YLZG9eE_XII/AAAAAAAAFNI/hPk8UF707xo7PgDTeKXc7dkA5g6hhGBtACLcBGAsYHQ/w1200-h630-p-k-no-nu/Logo%2BUniversitas%2BCiputra.png"
                                 alt="Your Company">
@@ -46,7 +48,7 @@
                         @if (session('role_id') == 1)
                             <div class="hidden sm:flex space-x-4">
                                 <!-- Accepted Courses Menu -->
-                                <a href="{{ route('user.acceptedCourses') }}"
+                                <a href="/user/accepted-courses"
                                     class="{{ request()->is('user/accepted-courses') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">
                                     Accepted Courses
                                 </a>
@@ -78,7 +80,7 @@
                             class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
                             {{-- <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem">Your Profile</a> --}}
-                            <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700"
+                            <a href="/logout" class="block px-4 py-2 text-sm text-gray-700"
                                 role="menuitem">Sign out</a>
                         </div>
                     </div>

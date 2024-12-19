@@ -69,9 +69,26 @@ class MataKuliahPilihanSeeder extends Seeder
                 ['pilihan_status' => $pilihan['pilihan_status']]
             );
         }
-    }
 
-    //     public function run(): void
+        // Dynamically generate Mata Kuliah Pilihan for each user
+        $users = User::all();
+        $mataKuliahs = MataKuliah::all();
+
+        foreach ($users as $user) {
+            // Assign exactly 3 random Mata Kuliah IDs for each user
+            $randomChoices = $mataKuliahs->random(3);
+
+            foreach ($randomChoices as $mataKuliah) {
+                MataKuliahPilihan::firstOrCreate(
+                    ['user_id' => $user->user_id, 'mata_kuliah_id' => $mataKuliah->mata_kuliah_id],
+                    ['pilihan_status' => fake()->randomElement(['approve', 'rejected', 'waiting'])]
+                );
+            }
+        }
+    }
+}
+
+//     public function run(): void
     //     {
     //        // Get all mata kuliahs
     //        $mataKuliahs = MataKuliah::all();
@@ -97,4 +114,3 @@ class MataKuliahPilihanSeeder extends Seeder
     //            }
     //        }
     //    }
-}

@@ -14,8 +14,7 @@
 
     <main class="p-6">
         <div class="container">
-            <h1>Accepted Courses for {{ $user->user_name }}</h1>
-
+            <h1 class="mb-4 text-2xl font-bold">Accepted Courses for {{ $user->user_name }}</h1>
             @if ($acceptedCourses->isEmpty())
                 <p class="text-gray-700">You have not been accepted into any courses yet.</p>
             @else

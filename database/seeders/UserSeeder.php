@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
@@ -12,6 +13,14 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Fetch available role IDs
+        $roles = Role::pluck('role_id')->toArray();
+
+        // Ensure roles exist
+        if (empty($roles)) {
+            $this->command->error('No roles found. Please run RoleSeeder first.');
+            return;
+        }
         // Predefined user data
         $users = [
             ['user_name' => 'Priscila King', 'user_email' => 'pchandra@student.com', 'user_nim' => '00001', 'role_id' => 2],
@@ -47,5 +56,12 @@ class UserSeeder extends Seeder
                 ]
             );
         }
+
+        // Generate 100 random users from the factory
+        User::factory(100)->state(function () use ($roles) {
+            return [
+                'role_id' => $roles[array_rand($roles)], // Assign a random valid role_id
+            ];
+        })->create();
     }
 }

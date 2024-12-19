@@ -9,13 +9,6 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    //view mahasiswa
-    public function viewUsers()
-    {
-        $users = User::where('role_id', 1)->with('role')->get();
-        return view('view-users', compact('users'));
-    }
-
     public function showLoginRegisterForm()
     {
         return view('login-register');
@@ -37,7 +30,7 @@ class UserController extends Controller
             ->first();
 
         if (!$user) {
-            // Return an error message if user is not found
+            // kkalau error
             return redirect()->back()->with('error', 'Email or NIM Incorrect!');
         }
 
@@ -59,6 +52,20 @@ class UserController extends Controller
 
         // Redirect to login page
         return redirect()->route('login')->with('message', 'You have been logged out.');
+    }
+
+    //view mahasiswa
+    public function viewUsers()
+    {
+        $users = User::where('role_id', 1)->with('role')->get();
+        return view('view-users', compact('users'));
+    }
+
+    //view admin
+    public function viewAdmins()
+    {
+        $users = User::where('role_id', 2)->with('role')->get();
+        return view('view-admins', compact('users'));
     }
 
     // public function showRegistrationForm()

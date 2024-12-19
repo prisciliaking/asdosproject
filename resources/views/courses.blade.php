@@ -15,7 +15,7 @@
         <!-- Main Content -->
         <div class="mx-auto p-6">
             <!-- Header -->
-                <h2 class="text-2xl font-semibold mb-2">Course(s):</h2>
+                <h1 class="mb-4 text-2xl font-bold">Courses</h1>
                 <!-- Dropdown: Default placeholder with no selection -->
                 <select id="semesterFilter" class="border border-gray-300 rounded py-2 px-3 w-64 text-black">
                     <option selected disabled>Semester</option>
@@ -39,10 +39,10 @@
         </div>
 
         <!-- Floating Button -->
-        <button onclick="location.href='/addcourse'"
+        {{-- <button onclick="location.href='/addcourse'"
             class="fixed bottom-10 right-10 bg-orange-300 hover:bg-orange-400 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
             <p class="text-2xl text-center">+</p>
-        </button>
+        </button> --}}
     </main>
 
     <script>
@@ -66,3 +66,37 @@
 </body>
 
 </html>
+
+{{-- <main class="p-6">
+    <!-- MataKuliah List -->
+    <h2 class="text-2xl font-semibold mb-4">MataKuliah List</h2>
+    <!-- Main Content -->
+    <div class="mx-auto p-6">
+        <!-- Header -->
+        <h2 class="text-2xl font-semibold mb-2">Course(s):</h2>
+        <!-- Dropdown: Default placeholder with no selection -->
+        <select id="semesterFilter" class="border border-gray-300 rounded py-2 px-3 w-64 text-black">
+            <option selected disabled>Semester</option>
+            <option value="ganjil">Semester Ganjil</option>
+            <option value="genap">Semester Genap</option>
+        </select>
+    </div>
+    <!-- Main Content -->
+    <div class="mx-auto p-6">
+        <!-- MataKuliah List -->
+        <div id="courseGrid"
+            class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-4 text-gray-700 text-center font-medium">
+            @foreach ($mataKuliahs as $mataKuliah)
+                <div
+                    class="p-10 course-card bg-orange-100 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105">
+                    <a href="{{ route('courses.details', ['mata_kuliah_id' => $mataKuliah->mata_kuliah_id]) }}"
+                        class="block w-full text-left focus:outline-none">
+                        <h3 class="text-lg font-bold text-gray-900">{{ $mataKuliah->mata_kuliah_nama ?? 'N/A' }}
+                        </h3>
+                        <p class="text-gray-800 mt-2">Click to view details</p>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</main> --}}

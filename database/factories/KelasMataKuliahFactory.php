@@ -16,7 +16,7 @@ class KelasMataKuliahFactory extends Factory
             'kelas_nama' => $this->faker->unique()->word(),
             'mata_kuliah_hari' => $this->faker->randomElement(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']),
             'mata_kuliah_jam' => $this->faker->time('H:i'),
-            'whats_app_link' => $this->faker->optional()->url(),
+            'whats_app_link' => $this->faker->url(),
             'kelas_semester' => $this->faker->randomElement(['ganjil', 'genap']),
             'is_deleted' => false,
             'matkul_dosen_id' => MataKuliahDosen::inRandomOrder()->first()->matkul_dosen_id,

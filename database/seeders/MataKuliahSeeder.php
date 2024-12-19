@@ -36,5 +36,7 @@ class MataKuliahSeeder extends Seeder
                 ['is_deleted' => $mk['is_deleted']]
             );
         }
+
+        MataKuliah::factory(30)->create();
     }
 }

@@ -21,9 +21,6 @@ class KelasMataKuliah extends Model
         'matkul_dosen_id',
     ];
 
-    /**
-     * Relationship with MataKuliahDosen model.
-     */
     public function mataKuliahDosen()
     {
         return $this->belongsTo(MataKuliahDosen::class, 'matkul_dosen_id', 'matkul_dosen_id');

@@ -43,41 +43,41 @@ class MataKuliahDosenController extends Controller
 
         return response()->json(['message' => 'Data created successfully', 'data' => $mataKuliahDosen], 201);
     }
-
-    // Mengupdate data Mata Kuliah Dosen berdasarkan ID
-    public function update(Request $request, $id)
-    {
-        $mataKuliahDosen = MataKuliahDosen::find($id);
-
-        if (!$mataKuliahDosen) {
-            return response()->json(['message' => 'Data not found'], 404);
-        }
-
-        $validator = Validator::make($request->all(), [
-            'dosen_id' => 'sometimes|exists:dosens,dosen_id',
-            'mata_kuliah_id' => 'sometimes|exists:mata_kuliahs,mata_kuliah_id',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-        $mataKuliahDosen->update($request->only(['dosen_id', 'mata_kuliah_id']));
-
-        return response()->json(['message' => 'Data updated successfully', 'data' => $mataKuliahDosen]);
-    }
-
-    // Menghapus data Mata Kuliah Dosen berdasarkan ID
-    public function destroy($id)
-    {
-        $mataKuliahDosen = MataKuliahDosen::find($id);
-
-        if (!$mataKuliahDosen) {
-            return response()->json(['message' => 'Data not found'], 404);
-        }
-
-        $mataKuliahDosen->delete();
-
-        return response()->json(['message' => 'Data deleted successfully']);
-    }
 }
+
+// Mengupdate data Mata Kuliah Dosen berdasarkan ID
+    // public function update(Request $request, $id)
+    // {
+    //     $mataKuliahDosen = MataKuliahDosen::find($id);
+
+    //     if (!$mataKuliahDosen) {
+    //         return response()->json(['message' => 'Data not found'], 404);
+    //     }
+
+    //     $validator = Validator::make($request->all(), [
+    //         'dosen_id' => 'sometimes|exists:dosens,dosen_id',
+    //         'mata_kuliah_id' => 'sometimes|exists:mata_kuliahs,mata_kuliah_id',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return response()->json(['errors' => $validator->errors()], 422);
+    //     }
+
+    //     $mataKuliahDosen->update($request->only(['dosen_id', 'mata_kuliah_id']));
+
+    //     return response()->json(['message' => 'Data updated successfully', 'data' => $mataKuliahDosen]);
+    // }
+
+    // // Menghapus data Mata Kuliah Dosen berdasarkan ID
+    // public function destroy($id)
+    // {
+    //     $mataKuliahDosen = MataKuliahDosen::find($id);
+
+    //     if (!$mataKuliahDosen) {
+    //         return response()->json(['message' => 'Data not found'], 404);
+    //     }
+
+    //     $mataKuliahDosen->delete();
+
+    //     return response()->json(['message' => 'Data deleted successfully']);
+    // }

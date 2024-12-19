@@ -31,5 +31,7 @@ class DosenSeeder extends Seeder
                 ['is_deleted' => $dosen['is_deleted']]
             );
         }
+
+        Dosen::factory(50)->create();
     }
 }

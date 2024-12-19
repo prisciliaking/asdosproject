@@ -9,24 +9,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-orange-100">
     <div class="flex justify-center items-center min-h-screen">
         <div class="bg-white p-6 rounded-lg shadow-lg w-96">
             <!-- Switcher Buttons -->
             <div class="flex mb-4">
                 <button id="loginTab"
-                    class="flex-1 py-2 px-4 text-gray-700 font-semibold border-2 border-r-0 border-gray-300 hover:bg-gray-100 focus:outline-none active:bg-gray-200">
+                    class="flex-1 py-2 px-4 text-orange-700 font-semibold border-2 border-r-0 border-orange-300 hover:bg-orange-100 focus:outline-none active:bg-gray-200">
                     Login
                 </button>
                 <button id="registerTab"
-                    class="flex-1 py-2 px-4 text-gray-500 font-semibold border-2 border-l-0 border-gray-300 hover:bg-gray-100 focus:outline-none active:bg-gray-200">
+                    class="flex-1 py-2 px-4 text-orange-500 font-semibold border-2 border-l-0 border-orange-300 hover:bg-orange-100 focus:outline-none active:bg-gray-200">
                     Register
                 </button>
             </div>
 
             <!-- Login Form -->
             <div id="loginForm">
-                
                 <!-- Success/Error Alerts -->
                 @if (session('message'))
                     <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
@@ -102,12 +101,12 @@
 
         // Set default active tab and form on page load
         window.addEventListener('DOMContentLoaded', () => {
-            loginTab.classList.add('text-gray-700', 'border-gray-300', 'bg-gray-100');
-            loginTab.classList.remove('text-gray-500', 'hover:bg-gray-200');
+            loginTab.classList.add('text-orange-700', 'border-orange-300', 'bg-orange-100');
+            loginTab.classList.remove('text-orange-500', 'hover:bg-orange-200');
             loginForm.classList.remove('hidden');
 
-            registerTab.classList.remove('bg-gray-100', 'text-gray-700');
-            registerTab.classList.add('text-gray-500', 'hover:bg-gray-200');
+            registerTab.classList.remove('bg-orange-100', 'text-orange-700');
+            registerTab.classList.add('text-orange-500', 'hover:bg-orange-200');
             registerForm.classList.add('hidden');
         });
 
@@ -116,11 +115,11 @@
             loginForm.classList.remove('hidden');
             registerForm.classList.add('hidden');
 
-            loginTab.classList.add('text-gray-700', 'border-gray-300', 'bg-gray-100');
-            loginTab.classList.remove('text-gray-500', 'hover:bg-gray-200');
+            loginTab.classList.add('text-orange-700', 'border-orange-300', 'bg-orange-100');
+            loginTab.classList.remove('text-orange-500', 'hover:bg-orange-200');
 
-            registerTab.classList.remove('bg-gray-100', 'text-gray-700');
-            registerTab.classList.add('text-gray-500', 'hover:bg-gray-200');
+            registerTab.classList.remove('bg-orange-100', 'text-orange-700');
+            registerTab.classList.add('text-orange-500', 'hover:bg-orange-200');
         });
 
         // Event Listener for Register Tab
@@ -128,11 +127,11 @@
             registerForm.classList.remove('hidden');
             loginForm.classList.add('hidden');
 
-            registerTab.classList.add('text-gray-700', 'border-gray-300', 'bg-gray-100');
-            registerTab.classList.remove('text-gray-500', 'hover:bg-gray-200');
+            registerTab.classList.add('text-orange-700', 'border-orange-300', 'bg-orange-100');
+            registerTab.classList.remove('text-orange-500', 'hover:bg-orange-200');
 
-            loginTab.classList.remove('bg-gray-100', 'text-gray-700');
-            loginTab.classList.add('text-gray-500', 'hover:bg-gray-200');
+            loginTab.classList.remove('bg-orange-100', 'text-orange-700');
+            loginTab.classList.add('text-orange-500', 'hover:bg-orange-200');
         });
     </script>
 </body>
