@@ -22,12 +22,6 @@ Route::get('/admins', [UserController::class, 'viewAdmins'])->name('admins');
 Route::get('/courses', [KelasMataKuliahController::class, 'index'])
     ->name('courses.index');
 
-Route::get('/approved', [MataKuliahAcceptController::class, 'index'])->name('approved.index');
-Route::get('/approved/{id}/students', [MataKuliahAcceptController::class, 'showAcceptedStudents'])
-    ->name('course.details');
-
-Route::get('/user/accepted-courses', [MataKuliahAcceptController::class, 'userAcceptedCourses'])
-    ->name('user.acceptedCourses');
 
 
 

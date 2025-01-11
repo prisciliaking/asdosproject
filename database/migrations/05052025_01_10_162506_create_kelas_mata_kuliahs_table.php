@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('mata_kuliah_hari');
             $table->time('mata_kuliah_jam');
             $table->string('whats_app_link')->nullable();
-            $table->integer('kelas_semester');
+            $table->string('kelas_semester');
 
             $table->foreignId('dosen_id')->constrained('dosens', 'dosen_id');
             $table->foreignId('matkul_id')->constrained('mata_kuliahs', 'matkul_id');
