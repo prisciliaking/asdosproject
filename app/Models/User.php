@@ -14,8 +14,12 @@ class User extends Model
     public $timestamps = false;
     protected $fillable = [
         'user_name',
+        'user_nim',
         'user_email',
-        "user_nim",
+        'user_password',
+        'image',
+        'role_id',
+        
     ];
 
     public function role()

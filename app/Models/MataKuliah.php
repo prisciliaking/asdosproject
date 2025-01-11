@@ -15,16 +15,16 @@ class MataKuliah extends Model
     protected $table = 'mata_kuliahs';
 
     // Specify the primary key (optional)
-    protected $primaryKey = 'mata_kuliah_id';
+    protected $primaryKey = 'matkul_id';
 
     // Specify fillable attributes
     protected $fillable = [
-        'mata_kuliah_nama',
-        'is_deleted',
+        'matkul_name',
+        'isOpen',
     ];
 
     // Cast `is_deleted` to boolean
     protected $casts = [
-        'is_deleted' => 'boolean',
+        'isOpen' => 'boolean',
     ];
 }

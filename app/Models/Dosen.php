@@ -19,11 +19,6 @@ class Dosen extends Model
     // Set fillable attributes
     protected $fillable = [
         'dosen_name',
-        'is_deleted'
     ];
-
-    // You can also specify cast types if needed
-    protected $casts = [
-        'is_deleted' => 'boolean',
-    ];
+ 
 }

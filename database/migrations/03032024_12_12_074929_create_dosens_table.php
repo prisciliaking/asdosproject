@@ -11,7 +11,6 @@ return new class extends Migration
         Schema::create('dosens', function (Blueprint $table) {
             $table->id('dosen_id');
             $table->string('dosen_name', 100);
-            $table->boolean('is_deleted')->default(false);
         });
     }
 

@@ -12,9 +12,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('mata_kuliahs', function (Blueprint $table) {
-            $table->id('mata_kuliah_id');
-            $table->string('mata_kuliah_nama', 100);
-            $table->boolean('is_deleted')->default(false);
+            $table->id('matkul_id');
+            $table->string('matkul_name', 100);
+            $table->boolean('isOpen')->default(false);
         });
     }
     

@@ -2,9 +2,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\KelasMataKuliah;
+use App\Models\RegistrasiAsdos;
 
-class KelasMataKuliahSeeder extends Seeder
+class RegistrasiAsdosSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,7 @@ class KelasMataKuliahSeeder extends Seeder
      */
     public function run()
     {
-        KelasMataKuliah::factory()->count(15)->create();
+        // Create 10 records using the factory
+        RegistrasiAsdos::factory()->count(10)->create();
     }
 }
