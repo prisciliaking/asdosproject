@@ -49,11 +49,12 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Email or Password Incorrect!');
         }
 
-        //simpen name, nim, role_id e user 
+        //simpen name, nim, role_id,image e user 
         session([
             'user_name' => $user->user_name,
             'user_password'  => $user->user_password,
             'role_id'   => $user->role->role_id,
+            'image' => $user->image,
         ]);
 
         ///if login success, then will go to home
@@ -84,15 +85,15 @@ class UserController extends Controller
             'user_nim' => 'required|string|unique:users,user_nim',
             'user_email' => 'required|email|unique:users,user_email',
             'user_password' => 'required|string|min:8',
-            // 'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
     
-        // Handle the image upload
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     // Store the image in 'public/images' directory within storage/app/public
-        //     $imagePath = $request->file('image')->store('images', 'public');
-        // }
+        //Handle the image upload
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            // Store the image in 'public/images' directory within storage/app/public
+            $imagePath = $request->file('image')->store('images', 'public');
+        }
     
         // Create and save the new user
         User::create([
@@ -100,7 +101,7 @@ class UserController extends Controller
             'user_nim' => $request->user_nim,
             'user_email' => $request->user_email,
             'user_password' => $request->user_password,
-            // 'image' => $imagePath, 
+            'image' => $imagePath, 
             'role_id' => 1, // mahasiswa
         ]);
     

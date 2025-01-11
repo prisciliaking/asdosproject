@@ -89,13 +89,13 @@
         </div>
 
         <!-- Image Upload -->
-        {{-- <div class="mb-4">
+        <div class="mb-4">
             <label for="image" class="form-label block text-sm font-medium text-white">Profile Image</label>
             <input type="file" class="form-control text-white" id="image" name="image" accept="image/jpg, image/png, image/jpeg">
             @error('image')
                 <div class="text-red-700">{{ $message }}</div>
             @enderror
-        </div> --}}
+        </div>
 
         <div class="flex justify-center">
             <button type="submit"
