@@ -7,15 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<footer class="bg-amber-950 text-white py-6">
-    <div class="container mx-auto text-center">
-        <p class="text-sm">
-            &copy; 2024 Website created by <span class="font-semibold">Rachelle Love Tjandra</span> and <span class="font-semibold">Priscilia King Chandra</span>. All rights reserved.
-        </p>
-    </div>
-</footer>
 
 <body>
+    <div class="container">
+        <footer class="bg-amber-950 text-white py-6">
+            <div class="container mx-auto text-center">
+                <p class="text-sm">
+                    &copy; 2024 Website created by <span class="font-semibold">Rachelle Love Tjandra</span> and <span
+                        class="font-semibold">Priscilia King Chandra</span>. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </div>
 
 </body>
 
