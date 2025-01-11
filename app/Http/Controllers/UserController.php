@@ -70,31 +70,40 @@ class UserController extends Controller
     }
 
 
-
     public function showRegistrationForm()
     {
         return view('register');
     }
+    
     //register
     public function register(Request $request)
     {
         // Validate the input fields
         $request->validate([
-            'user_name' => 'required|string|max:255,user_name',
+            'user_name' => 'required|string|max:255',
             'user_nim' => 'required|string|unique:users,user_nim',
             'user_email' => 'required|email|unique:users,user_email',
-            'user_password' => 'required|string|min:8,user_password', 
+            'user_password' => 'required|string|min:8',
+            // 'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-
+    
+        // Handle the image upload
+        // $imagePath = null;
+        // if ($request->hasFile('image')) {
+        //     // Store the image in 'public/images' directory within storage/app/public
+        //     $imagePath = $request->file('image')->store('images', 'public');
+        // }
+    
         // Create and save the new user
         User::create([
             'user_name' => $request->user_name,
             'user_nim' => $request->user_nim,
             'user_email' => $request->user_email,
             'user_password' => $request->user_password,
-            'role_id' => 1 //mahasiswa
+            // 'image' => $imagePath, 
+            'role_id' => 1, // mahasiswa
         ]);
-
+    
         // Redirect with a success message
         return redirect()->route('login')->with('message', 'Registration successful! Please log in.');
     }
