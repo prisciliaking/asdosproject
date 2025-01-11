@@ -9,7 +9,6 @@ class DosenSeeder extends Seeder
 {
     public function run()
     {
-        Dosen::factory()->count(20)->create();
         $dosens = [
             ['dosen_name' => 'Dipl.Inf.Laura Mahendratta'],
             ['dosen_name' => 'Evan Tanuwijaya,S.Kom.,M.Kom.'],

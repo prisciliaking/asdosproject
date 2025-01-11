@@ -46,8 +46,8 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="user_nim" class="block text-sm font-medium text-white">NIM</label>
-                        <input type="text" name="user_nim" id="user_nim"
+                        <label for="user_nim" class="block text-sm font-medium text-white">Password</label>
+                        <input type="text" name="user_password" id="user_password"
                             class="w-full p-2 border border-gray-300 rounded-md" required>
                     </div>
 
@@ -71,16 +71,24 @@
                     </div>
 
                     <div class="mb-4">
+                        <label for="user_nim" class="block text-sm font-medium text-white">NIM</label>
+                        <input type="text" name="user_nim" id="user_nim"
+                            class="w-full p-2 border border-gray-300 rounded-md" required>
+                    </div>
+
+                    <div class="mb-4">
                         <label for="user_email" class="block text-sm font-medium text-white">Email</label>
                         <input type="email" name="user_email" id="user_email"
                             class="w-full p-2 border border-gray-300 rounded-md" required>
                     </div>
 
                     <div class="mb-4">
-                        <label for="user_nim" class="block text-sm font-medium text-white">NIM</label>
-                        <input type="text" name="user_nim" id="user_nim"
+                        <label for="user_password" class="block text-sm font-medium text-white">Password</label>
+                        <input type="password" name="user_password" id="user_password"
                             class="w-full p-2 border border-gray-300 rounded-md" required>
                     </div>
+
+                    
 
                     <div class="flex justify-center">
                         <button type="submit"

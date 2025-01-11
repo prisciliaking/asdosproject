@@ -10,7 +10,7 @@ class User extends Model
     protected $table = 'users';
     protected $primaryKey = 'user_id';
 
-    use HasFactory;
+    // use HasFactory;
     public $timestamps = false;
     protected $fillable = [
         'user_name',

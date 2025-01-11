@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AsdosAccept extends Model
 {
-    use HasFactory;
+    // use HasFactory;
     protected $table = 'asdos_accept';
 
     protected $primaryKey = 'accept_id';

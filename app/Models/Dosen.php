@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dosen extends Model
 {
-    use HasFactory;
+    // use HasFactory;
     public $timestamps = false;
     
     // Specify the table name (optional if the table name follows Laravel's conventions)

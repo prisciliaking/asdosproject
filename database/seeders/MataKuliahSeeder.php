@@ -8,8 +8,6 @@ class MataKuliahSeeder extends Seeder
 {
     public function run(): void
     {
-        MataKuliah::factory()->count(15)->create();
-
         $matakuliahs = [
             ['matkul_name' => 'Kelas Alpro', 'isOpen' => 1],
             ['matkul_name' => 'Kelas ICT', 'isOpen' => 1],

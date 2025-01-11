@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RegistrasiAsdos extends Model
 {
-    use HasFactory;
+    // use HasFactory;
 
     protected $table = 'registrasi_asdos';
     protected $primaryKey = 'regis_id';

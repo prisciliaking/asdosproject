@@ -9,7 +9,7 @@ class MataKuliah extends Model
 {
     public $timestamps = false;
 
-    use HasFactory;
+    // use HasFactory;
 
     // Specify the table name (optional)
     protected $table = 'mata_kuliahs';
