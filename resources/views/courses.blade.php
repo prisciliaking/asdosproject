@@ -41,10 +41,10 @@
         </div>
 
         <!-- Floating Button -->
-        {{-- <button onclick="location.href='/addcourse'"
+        <button onclick="location.href='/addcourse'"
             class="fixed bottom-10 right-10 bg-orange-300 hover:bg-orange-400 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
             <p class="text-2xl text-center">+</p>
-        </button> --}}
+        </button>
     </main>
     <x-footer></x-footer>
     <script>

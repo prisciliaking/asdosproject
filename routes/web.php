@@ -34,7 +34,7 @@ Route::get('/user/accepted-courses', [MataKuliahAcceptController::class, 'userAc
 Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register.view');
 Route::post('/register', [UserController::class, 'register'])->name('register');
 
-// Route::get('/addcourse', function () { return view('addCourse'); });
+Route::get('/addcourse', function () { return view('addCourse'); });
 
 // Route to show MataKuliah list and details
 // Route::get('/courses', [MataKuliahController::class, 'index'])->name('courses.index');
