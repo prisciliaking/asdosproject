@@ -12,12 +12,12 @@ return new class extends Migration
             $table->id('user_id');
             $table->string('user_name', 100);
             $table->string('user_email', 225)->unique();
-            $table->string('user_nim', 100);
-
-
-            $table->foreignId('role_id')->default(1)->constrained(
-                'roles', //table
-                'role_id' //id
+            $table->string('user_nim', 100)->unique();
+            $table->string('user_password');
+            $table->string('image')->nullable();
+            $table->foreignId('role_id')->constrained(
+            'roles', //table
+            'role_id' //id
             );
         });
     }

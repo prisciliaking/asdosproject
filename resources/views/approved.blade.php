@@ -26,7 +26,7 @@
                             <p class="text-gray-800">Time: {{ $course->mata_kuliah_jam ?? 'N/A' }}</p>
                             <p class="text-gray-800">Lecturer:
                                 {{ $course->mataKuliahDosen->dosen->dosen_name ?? 'N/A' }}</p>
-
+                                
                             <!-- Flexbox Container -->
                             <div class="flex items-center justify-center mt-2 space-x-1">
                                 <span class="text-gray-800 font-medium">Group Link:</span>

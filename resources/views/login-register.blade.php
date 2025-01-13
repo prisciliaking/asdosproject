@@ -46,8 +46,8 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="user_nim" class="block text-sm font-medium text-white">NIM</label>
-                        <input type="text" name="user_nim" id="user_nim"
+                        <label for="user_nim" class="block text-sm font-medium text-white">Password</label>
+                        <input type="text" name="user_password" id="user_password"
                             class="w-full p-2 border border-gray-300 rounded-md" required>
                     </div>
 
@@ -60,36 +60,52 @@
                 </form>
             </div>
 
-            <!-- Register Form (Hidden by Default) -->
-            <div id="registerForm" class="hidden">
-                <form method="POST" action="{{ route('register') }}">
-                    @csrf
-                    <div class="mb-4">
-                        <label for="user_name" class="block text-sm font-medium text-white">Full Name</label>
-                        <input type="text" name="user_name" id="user_name"
-                            class="w-full p-2 border border-gray-300 rounded-md" required>
-                    </div>
+          <!-- Register Form (Hidden by Default) -->
+<div id="registerForm" class="hidden">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+        @csrf
+        <div class="mb-4">
+            <label for="user_name" class="block text-sm font-medium text-white">Full Name</label>
+            <input type="text" name="user_name" id="user_name"
+                class="w-full p-2 border border-gray-300 rounded-md" required>
+        </div>
 
-                    <div class="mb-4">
-                        <label for="user_email" class="block text-sm font-medium text-white">Email</label>
-                        <input type="email" name="user_email" id="user_email"
-                            class="w-full p-2 border border-gray-300 rounded-md" required>
-                    </div>
+        <div class="mb-4">
+            <label for="user_nim" class="block text-sm font-medium text-white">NIM</label>
+            <input type="text" name="user_nim" id="user_nim"
+                class="w-full p-2 border border-gray-300 rounded-md" required>
+        </div>
 
-                    <div class="mb-4">
-                        <label for="user_nim" class="block text-sm font-medium text-white">NIM</label>
-                        <input type="text" name="user_nim" id="user_nim"
-                            class="w-full p-2 border border-gray-300 rounded-md" required>
-                    </div>
+        <div class="mb-4">
+            <label for="user_email" class="block text-sm font-medium text-white">Email</label>
+            <input type="email" name="user_email" id="user_email"
+                class="w-full p-2 border border-gray-300 rounded-md" required>
+        </div>
 
-                    <div class="flex justify-center">
-                        <button type="submit"
-                            class="bg-orange-400 text-white px-4 py-2 rounded-lg w-full hover:bg-orange-500">
-                            Register
-                        </button>
-                    </div>
-                </form>
-            </div>
+        <div class="mb-4">
+            <label for="user_password" class="block text-sm font-medium text-white">Password</label>
+            <input type="password" name="user_password" id="user_password"
+                class="w-full p-2 border border-gray-300 rounded-md" required>
+        </div>
+
+        <!-- Image Upload -->
+        <div class="mb-4">
+            <label for="image" class="form-label block text-sm font-medium text-white">Profile Image</label>
+            <input type="file" class="form-control text-white" id="image" name="image" accept="image/jpg, image/png, image/jpeg">
+            @error('image')
+                <div class="text-red-700">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="flex justify-center">
+            <button type="submit"
+                class="bg-orange-400 text-white px-4 py-2 rounded-lg w-full hover:bg-orange-500">
+                Register
+            </button>
+        </div>
+    </form>
+</div>
+
         </div>
     </div>
 

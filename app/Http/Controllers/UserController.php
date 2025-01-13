@@ -9,49 +9,10 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    //login-register view
     public function showLoginRegisterForm()
     {
         return view('login-register');
-    }
-
-    //login
-    public function login(Request $request)
-    {
-        // Validate the input fields
-        $request->validate([
-            'user_email' => 'required|email',
-            'user_nim' => 'required|string',
-        ]);
-
-        // Attempt to find the user by email and NIM
-        $user = User::where('user_email', $request->user_email)
-            ->where('user_nim', $request->user_nim)
-            ->with('role')
-            ->first();
-
-        if (!$user) {
-            // kkalau error
-            return redirect()->back()->with('error', 'Email or NIM Incorrect!');
-        }
-
-        //simpen name, nim, role_id e user 
-        session([
-            'user_name' => $user->user_name,
-            'user_nim'  => $user->user_nim,
-            'role_id'   => $user->role->role_id,
-        ]);
-
-        ///if login success, then will go to home
-        return redirect()->route('home')->with('message', 'Login successful!');
-    }
-
-    public function logout(Request $request)
-    {
-        // Clear all user session data
-        $request->session()->flush();
-
-        // Redirect to login page
-        return redirect()->route('login')->with('message', 'You have been logged out.');
     }
 
     //view mahasiswa

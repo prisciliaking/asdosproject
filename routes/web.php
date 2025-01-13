@@ -7,7 +7,9 @@ use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\UserController;
 use App\Models\MataKuliahAccept;
 
-Route::get('/home', function () { return view('home'); })->name('home');
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
 
 Route::get('/', [UserController::class, 'showLoginRegisterForm'])->name('login');
 Route::post('/', [UserController::class, 'login'])->name('login');
@@ -17,13 +19,9 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/users', [UserController::class, 'viewUsers'])->name('users');
 Route::get('/admins', [UserController::class, 'viewAdmins'])->name('admins');
 
-Route::get('/courses', [KelasMataKuliahController::class, 'index'])->name('courses.index');
+Route::get('/courses', [KelasMataKuliahController::class, 'index'])
+    ->name('courses.index');
 
-Route::get('/approved', [MataKuliahAcceptController::class, 'index'])->name('approved.index');
-Route::get('/approved/{id}/students', [MataKuliahAcceptController::class, 'showAcceptedStudents'])->name('course.details');
-
-Route::get('/user/accepted-courses', [MataKuliahAcceptController::class, 'userAcceptedCourses'])
-    ->name('user.acceptedCourses');
 
 
 

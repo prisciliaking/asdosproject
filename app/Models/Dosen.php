@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dosen extends Model
 {
-    use HasFactory;
+    // use HasFactory;
     public $timestamps = false;
     
     // Specify the table name (optional if the table name follows Laravel's conventions)
@@ -19,11 +19,6 @@ class Dosen extends Model
     // Set fillable attributes
     protected $fillable = [
         'dosen_name',
-        'is_deleted'
     ];
-
-    // You can also specify cast types if needed
-    protected $casts = [
-        'is_deleted' => 'boolean',
-    ];
+ 
 }

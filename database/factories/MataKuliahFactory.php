@@ -17,9 +17,7 @@ class MataKuliahFactory extends Factory
     public function definition(): array
     {
         return [
-            'mata_kuliah_nama' => $this->faker->words(3, true), // 3 kata maksimal
-            'is_deleted' => $this->faker->boolean(10), // 10% chance of being deleted
-
+            'matkul_name' => $this->faker->words(3, true), // 3 kata maksimal 
         ];
     }
 }

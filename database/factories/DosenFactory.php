@@ -18,7 +18,6 @@ class DosenFactory extends Factory
     {
         return [
             'dosen_name' => $this->faker->name(),  // Generate a random name for dosen
-            'is_deleted' => $this->faker->boolean(),  // Randomly assign a boolean for is_deleted
         ];
     }
 }

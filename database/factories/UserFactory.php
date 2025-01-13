@@ -11,12 +11,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         // Fetch all roles directly from the Role model
-        $roles = Role::all();
-
-        // Check if roles are available
-        if ($roles->isEmpty()) {
-            throw new \Exception('Roles "mahasiswa" and "admin" must be created before seeding users.');
-        }
+        $roles = Role::all(['role_id']);
 
         // Randomly pick one of the roles
         $role = $roles->random();
@@ -25,7 +20,9 @@ class UserFactory extends Factory
             'user_name' => $this->faker->name(),
             'user_email' => $this->faker->unique()->safeEmail(),
             'user_nim' => $this->faker->unique()->numerify('0#####'),
-            'role_id' => $role->id,  
+            'user_password' => bcrypt('password'), // Default password
+            'image' => $this->faker->imageUrl(),
+            'role_id' => $role->role_id,  
         ];
     }
 }

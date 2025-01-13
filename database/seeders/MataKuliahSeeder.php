@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 use App\Models\MataKuliah;
@@ -9,34 +8,29 @@ class MataKuliahSeeder extends Seeder
 {
     public function run(): void
     {
-        // Predefined MataKuliah data
-        $mataKuliah = [
-            ['mata_kuliah_nama' => 'Algorithm and Programming', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Information Communication and Technology', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Computer Organization and Architecture', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Algebra', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Object Oriented Programming', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Web Programming', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Database', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Calculus', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Visual Programming', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Web Development', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Discrete Mathematic', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Operation System', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Digital Entrepreneurship Innovation', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Statistic', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Civics', 'is_deleted' => 0],
-            ['mata_kuliah_nama' => 'Big Data', 'is_deleted' => 0],
+        $matakuliahs = [
+            ['matkul_name' => 'Kelas Alpro', 'isOpen' => 1],
+            ['matkul_name' => 'Kelas ICT', 'isOpen' => 1],
+            ['matkul_name' => 'Kelas COA', 'isOpen' => 1],
+            ['matkul_name' => 'Kela Algebra', 'isOpen' => 1],
+            ['matkul_name' => 'Kelas OOP', 'isOpen' => 0],
+            ['matkul_name' => 'Kelas Webprog', 'isOpen' => 0],
+            ['matkul_name' => 'Kelas Database', 'isOpen' => 0],
+            ['matkul_name' => 'Kelas Calculus', 'isOpen' => 0],
+            ['matkul_name' => 'Kelas Visprog', 'isOpen' => 1],
+            ['matkul_name' => 'Kelas WebDev', 'isOpen' => 1],
+            ['matkul_name' => 'Kelas Discrete Math', 'isOpen' => 1],
+            ['matkul_name' => 'Kelas Oprating System', 'isOpen' => 1],
+            ['matkul_name' => 'Kelas DEI', 'isOpen' => 0],
+            ['matkul_name' => 'Kelas Statistic', 'isOpen' => 0],
+            ['matkul_name' => 'Kelas Civics', 'isOpen' => 0],
+            ['matkul_name' => 'Kelas Big Data', 'isOpen' => 0],
         ];
 
-        // Insert MataKuliah data without duplicates
-        foreach ($mataKuliah as $mk) {
-            MataKuliah::firstOrCreate(
-                ['mata_kuliah_nama' => $mk['mata_kuliah_nama']],
-                ['is_deleted' => $mk['is_deleted']]
-            );
+        foreach ($matakuliahs as $matkul) {
+            if (!MataKuliah::where('matkul_name', $matkul['matkul_name'])->exists()) {
+                MataKuliah::create($matkul);
+            }
         }
-
-        MataKuliah::factory(30)->create();
     }
 }
