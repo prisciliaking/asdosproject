@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    //
     //login-register view
     public function showLoginRegisterForm()
     {

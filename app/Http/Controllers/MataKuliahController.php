@@ -14,23 +14,23 @@ class MataKuliahController extends Controller
         return view('courses', ['mataKuliahs' => $mataKuliahs]);
     }
 
-    // Menampilkan detail data kelas mata kuliah berdasarkan mata_kuliah_id
+    // Menampilkan detail data kelas mata kuliah berdasarkan matkul_id
     public function show($id)
     {
         // Find Mata Kuliah
-        $mataKuliah = MataKuliah::find($id);
+        $matakuliah = MataKuliah::find($id);
 
-        if (!$mataKuliah) {
+        if (!$matakuliah) {
             return response()->json(['message' => 'Mata Kuliah not found'], 404);
         }
 
         // Fetch associated Kelas Mata Kuliah with dosen details
-        $kelasDetails = KelasMataKuliah::where('mata_kuliah_id', $id)
+        $kelasDetails = KelasMataKuliah::where('matkul_id', $id)
             ->with('mataKuliahDosen.dosen') // Load MataKuliahDosen and Dosen details
             ->get();
 
         return response()->json([
-            'mata_kuliah' => $mataKuliah,
+            'mata_kuliah' => $matakuliah,
             'kelas_details' => $kelasDetails
         ]);
     }
