@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Models\AsdosAccept;
 use App\Models\KelasMataKuliah;
 use App\Models\MataKuliahAccept;
+use App\Http\Controllers\RegistrasiAsdosController;
 
 
 Route::get('/', [UserController::class, 'showLoginRegisterForm'])->name('login');
@@ -42,27 +43,25 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
     Route::get('/addcourse', [KelasMataKuliahController::class, 'create'])->name('addCourse');
-    Route::post('/addcourse', [KelasMataKuliahController::class, 'store'])->name('addCourse');
+    Route::post('/addcourse', [KelasMataKuliahController::class, 'store'])->name('addCourse.store');
 
-
-    // Route untuk menampilkan daftar kelas mata kuliah
+    // Route to display the list of courses
     Route::get('/courses', [KelasMataKuliahController::class, 'index'])->name('courses.index');
 
-    // Route untuk menampilkan detail kelas mata kuliah berdasarkan ID
+    // Route to show course details by ID
     Route::get('/courses/{id}', [KelasMataKuliahController::class, 'show'])->name('courses.show');
 
-    // Route untuk menampilkan form edit kelas mata kuliah
+    // Route to display the edit form
     Route::get('/courses/{id}/edit', [KelasMataKuliahController::class, 'edit'])->name('courses.edit');
 
-    // Route untuk memperbarui data kelas mata kuliah
+    // Route to update the course
     Route::put('/courses/{id}', [KelasMataKuliahController::class, 'update'])->name('courses.update');
 
-    // Route untuk menghapus kelas mata kuliah
+    // Route to delete a course
     Route::delete('/courses/{id}', [KelasMataKuliahController::class, 'destroy'])->name('courses.destroy');
 
-    Route::get('/addcourse', function () {
-        return view('addCourse');
-    });
+    Route::get('/registrasi-asdos', [RegistrasiAsdosController::class, 'create'])->name('registrasiAsdos.create');
+    Route::post('/registrasi-asdos', [RegistrasiAsdosController::class, 'store'])->name('registrasiAsdos.store');
 });
 
 

@@ -17,7 +17,7 @@
             <form action="{{ route('addCourse') }}" method="POST">
                 @csrf
                 <!-- Mata Kuliah Dropdown -->
-                {{-- <div class="mb-4">
+                <div class="mb-4">
                     <label for="matkul_id" class="block text-gray-700 font-semibold mb-2">Select Course</label>
                     <select name="matkul_id" id="matkul_id"
                         class="w-full p-3 rounded bg-gray-50 border focus:outline-none focus:ring-2 focus:ring-orange-300">
@@ -26,7 +26,11 @@
                             <option value="{{ $matkul->matkul_id }}">{{ $matkul->matkul_name }}</option>
                         @endforeach
                     </select>
-                </div> --}}
+                    @error('matkul_id')
+                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Class Name -->
                 <div class="mb-4">
                     <label for="kelas_name" class="block text-gray-700 font-semibold mb-2">Class Name</label>

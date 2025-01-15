@@ -21,6 +21,8 @@ class KelasMataKuliah extends Model
         'mata_kuliah_jam',
         'whats_app_link',
         'kelas_semester',
+        'matkul_id',
+        'dosen_id',
     ];
 
     public function Dosen()

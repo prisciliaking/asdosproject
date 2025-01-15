@@ -46,7 +46,12 @@
                         </a>
                         <!-- Mahasiswa Menu -->
                         @if (session('role_id') == 1)
+                         <!-- Registratioin Courses Menu -->
                             <div class="hidden sm:flex space-x-4">
+                                <a href="/registrasi-asdos"
+                                    class="{{ request()->is('/registrasi-asdos') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">
+                                    Registration
+                                </a>
                                 <!-- Accepted Courses Menu -->
                                 <a href="/user/accepted-courses"
                                     class="{{ request()->is('user/accepted-courses') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">
@@ -54,6 +59,8 @@
                                 </a>
                             </div>
                         @endif
+
+
                     </div>
 
                 @endif

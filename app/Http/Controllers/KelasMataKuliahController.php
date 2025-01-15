@@ -48,6 +48,7 @@ class KelasMataKuliahController extends Controller
             'matkul_id' => 'required|exists:mata_kuliahs,matkul_id',
             'dosen_id' => 'required|exists:dosens,dosen_id',
         ]);
+        Log::info('Validated Data:', $validatedData);
 
         try {
             // Create a new KelasMataKuliah record
@@ -60,13 +61,28 @@ class KelasMataKuliahController extends Controller
             $kelasMataKuliah->matkul_id = $validatedData['matkul_id'];
             $kelasMataKuliah->dosen_id = $validatedData['dosen_id'];
 
-            // Save the data to the database
+
+            Log::info('Data yang akan disimpan:', [
+                'kelas_name' => $kelasMataKuliah->kelas_name,
+                'mata_kuliah_hari' => $kelasMataKuliah->mata_kuliah_hari,
+                'mata_kuliah_jam' => $kelasMataKuliah->mata_kuliah_jam,
+                'whats_app_link' => $kelasMataKuliah->whats_app_link,
+                'kelas_semester' => $kelasMataKuliah->kelas_semester,
+                'matkul_id' => $kelasMataKuliah->matkul_id,
+                'dosen_id' => $kelasMataKuliah->dosen_id
+            ]);            // Save the data to the database
             $kelasMataKuliah->save();
 
             // Redirect to the courses index page with success message
             return redirect()->route('courses.index')->with('success', 'Kelas Mata Kuliah created successfully!');
         } catch (\Exception $e) {
-            // Catch any errors and return an error message
+            // Log the exception error message before returning the error response
+            Log::error('Error saat menyimpan data:', [
+                'message' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile(),
+                'trace' => $e->getTraceAsString()
+            ]);            // Catch any errors and return an error message
             return back()->withErrors(['error' => 'Failed to create class: ' . $e->getMessage()]);
         }
     }
