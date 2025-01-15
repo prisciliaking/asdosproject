@@ -1,5 +1,3 @@
-<!-- approvedDetail.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,16 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Accepted Students for {{ $course->kelas_nama }}</title>
+    <title>Accepted Students</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
     <x-navigation></x-navigation>
-    
+
     <main>
         <div class="mx-auto p-6">
-            <h2 class="text-2xl font-semibold mb-4 ">Accepted Students for {{ $course->kelas_nama }}</h2>
+            <h2 class="text-2xl font-semibold mb-4">
+                Accepted Students for Class: {{ $asdosAssignments->first()->kelasMatakuliah->kelas_name ?? 'N/A' }}
+            </h2>
 
             <!-- Students Table -->
             <table class="min-w-full table-auto border-collapse">
@@ -29,18 +29,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($acceptedStudents as $index => $acceptance)
+                    @forelse ($asdosAssignments as $index => $assignment)
                         <tr>
-                            <td class="border px-4 py-2">{{ $index + 1 }}</td>
-                            <td class="border px-4 py-2">{{ $acceptance->user->user_name }}</td>
-                            <td class="border px-4 py-2">{{ $acceptance->user->user_nim }}</td>
-                            <td class="border px-4 py-2">{{ $acceptance->user->user_email}}</td>
+                            <td class="border px-4 py-2 text-center">{{ $index + 1 }}</td>
+                            <td class="border px-4 py-2">{{ $assignment->user->user_name ?? 'N/A' }}</td>
+                            <td class="border px-4 py-2">{{ $assignment->user->user_nim ?? 'N/A' }}</td>
+                            <td class="border px-4 py-2">{{ $assignment->user->user_email ?? 'N/A' }}</td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="4" class="border px-4 py-2 text-center">No students have been assigned to this class.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
     </main>
     <x-footer></x-footer>
 </body>
+
 </html>

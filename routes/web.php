@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AsdosAcceptController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KelasMataKuliahController;
 use App\Http\Controllers\MataKuliahAcceptController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\UserController;
+use App\Models\AsdosAccept;
 use App\Models\KelasMataKuliah;
 use App\Models\MataKuliahAccept;
 
@@ -23,8 +25,16 @@ Route::get('/admins', [UserController::class, 'viewAdmins'])->name('admins');
 Route::get('/courses', [KelasMataKuliahController::class, 'index'])
     ->name('courses.index');
 
-Route::get('/approved', [KelasMataKuliahController::class, 'approved'])
+Route::get('/approved', [AsdosAcceptController::class, 'showAsdos'])
     ->name('approved');
+
+Route::get('/approvedDetail', [AsdosAcceptController::class, 'index'])
+    ->name('approvedDetail');
+
+Route::get('/approvedDetail/{kelasId}', [AsdosAcceptController::class, 'showDetail'])->name('approvedDetail');
+
+
+
 
 // Route untuk menampilkan form tambah kelas mata kuliah
 Route::get('/addcourse', [KelasMataKuliahController::class, 'create'])->name('addCourse');
@@ -57,6 +67,9 @@ Route::delete('/courses/{id}', [KelasMataKuliahController::class, 'destroy'])->n
 Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register.view');
 Route::post('/register', [UserController::class, 'register'])->name('register');
 
+Route::get('/addcourse', function () {
+    return view('addCourse');
+});
 
 
 
