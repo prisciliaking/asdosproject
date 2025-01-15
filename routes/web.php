@@ -33,15 +33,12 @@ Route::get('/approvedDetail', [AsdosAcceptController::class, 'index'])
 
 Route::get('/approvedDetail/{kelasId}', [AsdosAcceptController::class, 'showDetail'])->name('approvedDetail');
 
+Route::get('/user/accepted-courses', [AsdosAcceptController::class, 'getMyAssignments'])->name('studentApproval');
 
 
 
-// Route untuk menampilkan form tambah kelas mata kuliah
+
 Route::get('/addcourse', [KelasMataKuliahController::class, 'create'])->name('addCourse');
-
-// // Route untuk menyimpan data kelas mata kuliah baru
-// Route::post('/addcourse', [KelasMataKuliahController::class, 'store'])->name('addCourse.store');
-// routes/web.php
 Route::post('/addcourse', [KelasMataKuliahController::class, 'store'])->name('addCourse');
 
 

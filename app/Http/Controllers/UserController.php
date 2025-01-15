@@ -52,6 +52,7 @@ class UserController extends Controller
 
         //simpen name, nim, role_id,image e user 
         session([
+            'user_id' => Auth::id(),
             'user_name' => $user->user_name,
             'user_password'  => $user->user_password,
             'role_id'   => $user->role->role_id,

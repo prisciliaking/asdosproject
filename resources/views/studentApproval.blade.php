@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +7,12 @@
     <title>Accepted Courses</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-
 <body>
     <x-navigation></x-navigation>
 
     <main class="p-6">
         <div class="container">
-            <h1 class="mb-4 text-2xl font-bold">Accepted Courses for {{ $user->user_name }}</h1>
+            <h1 class="mb-4 text-2xl font-bold">Accepted Courses for </h1>
             @if ($acceptedCourses->isEmpty())
                 <p class="text-gray-700">You have not been accepted into any courses yet.</p>
             @else
@@ -33,21 +31,12 @@
                         @foreach ($acceptedCourses as $index => $course)
                             <tr>
                                 <td class="border px-4 py-2">{{ $index + 1 }}</td>
+                                <td class="border px-4 py-2">{{ $course->kelasMatakuliah->kelas_name ?? 'N/A' }}</td>
+                                <td class="border px-4 py-2">{{ $course->kelasMatakuliah->dosen->dosen_name ?? 'N/A' }}</td>
+                                <td class="border px-4 py-2">{{ $course->kelasMatakuliah->mata_kuliah_hari ?? 'N/A' }}</td>
+                                <td class="border px-4 py-2">{{ $course->kelasMatakuliah->mata_kuliah_jam ?? 'N/A' }}</td>
                                 <td class="border px-4 py-2">
-                                    {{ $course->mataKuliah->kelas_name ?? 'N/A' }}
-                                </td>
-                                <td class="border px-4 py-2">
-                                    {{ $course->mataKuliah->dosen->dosen_name ?? 'N/A' }}
-                                </td>
-                                <td class="border px-4 py-2">
-                                    {{ $course->mataKuliah->mata_kuliah_hari ?? 'N/A' }}
-                                </td>
-                                <td class="border px-4 py-2">
-                                    {{ $course->mataKuliah->mata_kuliah_jam ?? 'N/A' }}
-                                </td>
-                                <td class="border px-4 py-2">
-                                    <a href="{{ $course->mataKuliah->whats_app_link ?? '#' }}" target="_blank"
-                                        class="text-blue-500 underline">
+                                    <a href="{{ $course->kelasMatakuliah->whats_app_link ?? '#' }}" target="_blank" class="text-blue-500 underline">
                                         Join Group
                                     </a>
                                 </td>
@@ -57,10 +46,8 @@
                 </table>
             @endif
         </div>
-        </tbody>
-        </table>
     </main>
     <x-footer></x-footer>
 </body>
-
 </html>
+    

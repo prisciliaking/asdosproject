@@ -31,23 +31,19 @@ class AsdosAcceptController extends Controller
         return view('approvedDetail', compact('asdosAssignments'));
     }
 
-
-    public function getByUser($userId)
-    {
-        $asdosAssignments = AsdosAccept::with(['kelasMatakuliah'])
-            ->where('user_id', $userId)
-            ->get();
-
-        return response()->json($asdosAssignments);
-    }
-
     public function getMyAssignments()
     {
-        $userId = Auth::id();
-        $asdosAssignments = AsdosAccept::with(['kelasMatakuliah'])
+        $userId = Auth::id(); // Retrieve the authenticated user's ID
+
+        // Fetch the accepted courses for the authenticated user
+        $acceptedCourses = AsdosAccept::with(['kelasMatakuliah, user'])
             ->where('user_id', $userId)
             ->get();
 
-        return response()->json($asdosAssignments);
+        // Return the view with the user and accepted courses data
+        return view('studentApproval', [
+            'user' => Auth::user(),
+            'acceptedCourses' => $acceptedCourses,
+        ]);
     }
 }

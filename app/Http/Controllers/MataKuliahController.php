@@ -11,7 +11,7 @@ class MataKuliahController extends Controller
     public function index()
     {
         $mataKuliahs = MataKuliah::all();
-        return response()->json($mataKuliahs);
+        return view('courses', compact('mataKuliahs'));
     }
 
     // Show the form for creating a new resource (if using views)

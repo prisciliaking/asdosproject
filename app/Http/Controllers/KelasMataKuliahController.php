@@ -7,6 +7,7 @@ use App\Http\Controllers\MataKuliahController;
 use App\Models\MataKuliah;
 use App\Models\Dosen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class KelasMataKuliahController extends Controller
 {
@@ -17,67 +18,58 @@ class KelasMataKuliahController extends Controller
 
         // Mengirim data ke view
         return view('courses', compact('courses'));
-        
     }
-
-    // Display a listing of the resource
-
-    // public function index()
-    // {
-    //     $kelasMataKuliahs = KelasMataKuliah::with(['Dosen', 'MataKuliah'])->get();
-    //     return response()->json($kelasMataKuliahs);
-    // }
-    // Show the form for creating a new resource
-
-    // Menampilkan daftar kelas mata kuliah dalam format JSON
-
 
     // Menampilkan form untuk membuat kelas mata kuliah baru
     public function create()
     {
-        // Mengambil data MataKuliah dan Dosen untuk digunakan di form
-        $mataKuliahs = MataKuliah::all();
-        $dosens = Dosen::all();
+        $mataKuliahs = MataKuliah::all(); // Fetch all MataKuliah records
+        $dosens = Dosen::all();          // Fetch all Dosen records
 
-        // Mengirim data ke view
+        if ($mataKuliahs->isEmpty()) {
+            return back()->withErrors(['error' => 'No courses found.']);
+        }
+
+        // Pass the data to the 'addCourse' view
         return view('addCourse', compact('mataKuliahs', 'dosens'));
     }
 
+
     // Menyimpan kelas mata kuliah baru ke database
     public function store(Request $request)
-{
-    // Validate the input data
-    $validatedData = $request->validate([
-        'kelas_name' => 'required|string|max:255',
-        'mata_kuliah_hari' => 'required|string|max:255',
-        'mata_kuliah_jam' => 'required|string|max:255',
-        'whats_app_link' => 'nullable|url',
-        'kelas_semester' => 'required|string|max:255',
-        'matkul_id' => 'required|exists:mata_kuliahs,matkul_id',
-        'dosen_id' => 'required|exists:dosens,dosen_id',
-    ]);
+    {
+        // Validate the input data
+        $validatedData = $request->validate([
+            'kelas_name' => 'required|string|max:255',
+            'mata_kuliah_hari' => 'required|string|max:255',
+            'mata_kuliah_jam' => 'required|string|max:255',
+            'whats_app_link' => 'nullable|url',
+            'kelas_semester' => 'required|string|max:255',
+            'matkul_id' => 'required|exists:mata_kuliahs,matkul_id',
+            'dosen_id' => 'required|exists:dosens,dosen_id',
+        ]);
 
-    try {
-        // Create a new KelasMataKuliah record
-        $kelasMataKuliah = new KelasMataKuliah();
-        $kelasMataKuliah->kelas_name = $validatedData['kelas_name'];
-        $kelasMataKuliah->mata_kuliah_hari = $validatedData['mata_kuliah_hari'];
-        $kelasMataKuliah->mata_kuliah_jam = $validatedData['mata_kuliah_jam'];
-        $kelasMataKuliah->whats_app_link = $validatedData['whats_app_link'];
-        $kelasMataKuliah->kelas_semester = $validatedData['kelas_semester'];
-        $kelasMataKuliah->matkul_id = $validatedData['matkul_id'];
-        $kelasMataKuliah->dosen_id = $validatedData['dosen_id'];
+        try {
+            // Create a new KelasMataKuliah record
+            $kelasMataKuliah = new KelasMataKuliah();
+            $kelasMataKuliah->kelas_name = $validatedData['kelas_name'];
+            $kelasMataKuliah->mata_kuliah_hari = $validatedData['mata_kuliah_hari'];
+            $kelasMataKuliah->mata_kuliah_jam = $validatedData['mata_kuliah_jam'];
+            $kelasMataKuliah->whats_app_link = $validatedData['whats_app_link'];
+            $kelasMataKuliah->kelas_semester = $validatedData['kelas_semester'];
+            $kelasMataKuliah->matkul_id = $validatedData['matkul_id'];
+            $kelasMataKuliah->dosen_id = $validatedData['dosen_id'];
 
-        // Save the data to the database
-        $kelasMataKuliah->save();
+            // Save the data to the database
+            $kelasMataKuliah->save();
 
-        // Redirect to the courses index page with success message
-        return redirect()->route('courses.index')->with('success', 'Kelas Mata Kuliah created successfully!');
-    } catch (\Exception $e) {
-        // Catch any errors and return an error message
-        return back()->withErrors(['error' => 'Failed to create class: ' . $e->getMessage()]);
+            // Redirect to the courses index page with success message
+            return redirect()->route('courses.index')->with('success', 'Kelas Mata Kuliah created successfully!');
+        } catch (\Exception $e) {
+            // Catch any errors and return an error message
+            return back()->withErrors(['error' => 'Failed to create class: ' . $e->getMessage()]);
+        }
     }
-}
 
 
 
