@@ -46,8 +46,8 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="user_nim" class="block text-sm font-medium text-white">Password</label>
-                        <input type="text" name="user_password" id="user_password"
+                        <label for="user_password" class="block text-sm font-medium text-white">Password</label>
+                        <input type="password" name="user_password" id="user_password"
                             class="w-full p-2 border border-gray-300 rounded-md" required>
                     </div>
 

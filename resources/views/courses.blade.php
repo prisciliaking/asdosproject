@@ -19,8 +19,8 @@
             <!-- Dropdown: Default placeholder with no selection -->
             <select id="semesterFilter" class="border border-gray-300 rounded py-2 px-3 w-64 text-black">
                 <option value="">Semester</option>
-                <option value="ganjil">Semester Ganjil</option>
-                <option value="genap">Semester Genap</option>
+                <option value="odd">Semester Ganjil</option>
+                <option value="even">Semester Genap</option>
             </select>
         </div>
 

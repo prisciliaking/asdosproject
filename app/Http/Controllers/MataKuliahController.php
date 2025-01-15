@@ -2,89 +2,91 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KelasMataKuliah;
 use App\Models\MataKuliah;
+use Illuminate\Http\Request;
 
 class MataKuliahController extends Controller
 {
-    // Menampilkan semua data mata kuliah
+    // Display a listing of the resource
     public function index()
     {
-        $mataKuliahs = MataKuliah::all(); // Fetch all MataKuliahs
-        return view('courses', ['mataKuliahs' => $mataKuliahs]);
+        $mataKuliahs = MataKuliah::all();
+        return response()->json($mataKuliahs);
     }
 
-    // Menampilkan detail data kelas mata kuliah berdasarkan matkul_id
+    // Show the form for creating a new resource (if using views)
+    public function create()
+    {
+        return view('addCourse');
+    }
+
+    // Store a newly created resource in storage
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'matkul_name' => 'required|string|max:255',
+            'isOpen' => 'required|boolean',
+        ]);
+
+        $mataKuliah = MataKuliah::create($validatedData);
+
+        return response()->json(['message' => 'Mata kuliah created successfully', 'data' => $mataKuliah], 201);
+    }
+
+    // Display the specified resource
     public function show($id)
     {
-        // Find Mata Kuliah
-        $matakuliah = MataKuliah::find($id);
+        $mataKuliah = MataKuliah::find($id);
 
-        if (!$matakuliah) {
-            return response()->json(['message' => 'Mata Kuliah not found'], 404);
+        if (!$mataKuliah) {
+            return response()->json(['message' => 'Mata kuliah not found'], 404);
         }
 
-        // Fetch associated Kelas Mata Kuliah with dosen details
-        $kelasdetail = KelasMataKuliah::where('matkul_id', $id)
-            ->with('mataKuliahDosen.dosen') // Load MataKuliahDosen and Dosen details
-            ->get();
-
-        return response()->json([
-            'mata_kuliah' => $matakuliah,
-            'kelas_details' => $kelasdetail
-        
-        ]);
+        return response()->json($mataKuliah);
     }
 
-// Menambahkan data mata kuliah baru
-    // public function store(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'mata_kuliah_nama' => 'required|string|max:255',
-    //     ]);
+    // Show the form for editing the specified resource (if using views)
+    public function edit($id)
+    {
+        $mataKuliah = MataKuliah::find($id);
 
-    //     if ($validator->fails()) {
-    //         return response()->json(['errors' => $validator->errors()], 422);
-    //     }
+        if (!$mataKuliah) {
+            return redirect()->route('mataKuliahs.index')->with('error', 'Mata kuliah not found');
+        }
 
-    //     $mataKuliah = MataKuliah::create($request->only(['mata_kuliah_nama']));
+        return view('mata_kuliahs.edit', compact('mataKuliah'));
+    }
 
-    //     return response()->json(['message' => 'Mata Kuliah created successfully', 'data' => $mataKuliah], 201);
-    // }
+    // Update the specified resource in storage
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'matkul_name' => 'required|string|max:255',
+            'isOpen' => 'required|boolean',
+        ]);
 
-    // Mengupdate data mata kuliah berdasarkan ID
-    // public function update(Request $request, $id)
-    // {
-    //     $mataKuliah = MataKuliah::find($id);
+        $mataKuliah = MataKuliah::find($id);
 
-    //     if (!$mataKuliah) {
-    //         return response()->json(['message' => 'Mata Kuliah not found'], 404);
-    //     }
+        if (!$mataKuliah) {
+            return response()->json(['message' => 'Mata kuliah not found'], 404);
+        }
 
-    //     $validator = Validator::make($request->all(), [
-    //         'mata_kuliah_nama' => 'sometimes|string|max:255',
-    //     ]);
+        $mataKuliah->update($validatedData);
 
-    //     if ($validator->fails()) {
-    //         return response()->json(['errors' => $validator->errors()], 422);
-    //     }
+        return response()->json(['message' => 'Mata kuliah updated successfully', 'data' => $mataKuliah]);
+    }
 
-    //     $mataKuliah->update($request->only(['mata_kuliah_nama']));
+    // Remove the specified resource from storage
+    public function destroy($id)
+    {
+        $mataKuliah = MataKuliah::find($id);
 
-    //     return response()->json(['message' => 'Mata Kuliah updated successfully', 'data' => $mataKuliah]);
-    // }
+        if (!$mataKuliah) {
+            return response()->json(['message' => 'Mata kuliah not found'], 404);
+        }
 
-    // // Menghapus data mata kuliah
-    // public function destroy($id)
-    // {
-    //     $mataKuliah = MataKuliah::find($id);
+        $mataKuliah->delete();
 
-    //     if (!$mataKuliah) {
-    //         return response()->json(['message' => 'Mata Kuliah not found'], 404);
-    //     }
-
-    //     $mataKuliah->delete();
-
-    //     return response()->json(['message' => 'Mata Kuliah deleted successfully']);
-    // }
+        return response()->json(['message' => 'Mata kuliah deleted successfully']);
+    }
 }
