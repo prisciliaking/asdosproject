@@ -25,8 +25,9 @@
         </div>
 
         <!-- Course Grid -->
-        <div id="courseGrid" class="p-6 grid grid-cols-3 gap-y-10 gap-x-4 text-gray-700 text-center font-medium">
-            @foreach ($courses as $course)
+         <div id="courseGrid"
+                class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-4 text-gray-700 text-center font-medium">
+                @foreach ($courses as $course)
                 <div class="p-10 course-card bg-orange-100 rounded-lg shadow-md"
                     data-semester="{{ $course->kelas_semester }}">
                     <h3 class="text-lg font-bold">{{ $course->kelas_name }}</h3>

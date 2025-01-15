@@ -34,10 +34,10 @@
                             <tr>
                                 <td class="border px-4 py-2">{{ $index + 1 }}</td>
                                 <td class="border px-4 py-2">
-                                    {{ $course->mataKuliah->kelas_nama ?? 'N/A' }}
+                                    {{ $course->mataKuliah->kelas_name ?? 'N/A' }}
                                 </td>
                                 <td class="border px-4 py-2">
-                                    {{ $course->mataKuliah->mataKuliahDosen->dosen->dosen_name ?? 'N/A' }}
+                                    {{ $course->mataKuliah->dosen->dosen_name ?? 'N/A' }}
                                 </td>
                                 <td class="border px-4 py-2">
                                     {{ $course->mataKuliah->mata_kuliah_hari ?? 'N/A' }}

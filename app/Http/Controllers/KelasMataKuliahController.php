@@ -15,6 +15,16 @@ class KelasMataKuliahController extends Controller
         return view('courses', compact('courses'));
         
     }
+
+    // public function showAsdos()
+    // {
+    //     // Mengambil semua data kelas mata kuliah
+    //     $courses = KelasMataKuliah::with('Dosen', 'MataKuliah')->get();
+
+    //     // Mengirim data ke view
+    //     return view('approved', compact('courses'));
+        
+    // }
 }
 
 // public function showByMataKuliah($mata_kuliah_id)
