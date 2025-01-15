@@ -36,7 +36,7 @@ class AsdosAcceptController extends Controller
         $userId = Auth::id(); // Retrieve the authenticated user's ID
 
         // Fetch the accepted courses for the authenticated user
-        $acceptedCourses = AsdosAccept::with(['kelasMatakuliah, user'])
+        $acceptedCourses = AsdosAccept::with(['kelasMataKuliah', 'user'])
             ->where('user_id', $userId)
             ->get();
 

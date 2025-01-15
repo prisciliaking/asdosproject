@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class AsdosAccept extends Model
 {
@@ -10,15 +13,15 @@ class AsdosAccept extends Model
 
     protected $primaryKey = 'accept_id';
     public $timestamps = false;
-    
+
     protected $fillable = [
         'kelas_id',
         'user_id',
     ];
 
-    public function kelasMatakuliah()
+    public function kelasMataKuliah()
     {
-        return $this->belongsTo(KelasMatakuliah::class, 'kelas_id');
+        return $this->belongsTo(KelasMataKuliah::class, 'kelas_id');
     }
 
     public function user()

@@ -45,6 +45,7 @@ class UserController extends Controller
             ->with('role')
             ->first();
 
+        Auth::login($user);
         if (!$user) {
             // kkalau error
             return redirect()->back()->with('error', 'Email or Password Incorrect!');
@@ -57,7 +58,7 @@ class UserController extends Controller
             'role_id'   => $user->role->role_id,
             'image' => $user->image,
         ]);
-        
+
         ///if login success, then will go to home
         return redirect()->route('home')->with('message', 'Login successful!');
     }
@@ -76,7 +77,7 @@ class UserController extends Controller
     {
         return view('register');
     }
-    
+
     //register
     public function register(Request $request)
     {
@@ -88,24 +89,24 @@ class UserController extends Controller
             'user_password' => 'required|string|min:8',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-    
+
         //Handle the image upload
         $imagePath = null;
         if ($request->hasFile('image')) {
             // Store the image in 'public/images' directory within storage/app/public
             $imagePath = $request->file('image')->store('images', 'public');
         }
-    
+
         // Create and save the new user
         User::create([
             'user_name' => $request->user_name,
             'user_nim' => $request->user_nim,
             'user_email' => $request->user_email,
             'user_password' => $request->user_password,
-            'image' => $imagePath, 
+            'image' => $imagePath,
             'role_id' => 1, // mahasiswa
         ]);
-    
+
         // Redirect with a success message
         return redirect()->route('login')->with('message', 'Registration successful! Please log in.');
     }
