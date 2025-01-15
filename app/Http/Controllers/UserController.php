@@ -49,7 +49,6 @@ class UserController extends Controller
             // kkalau error
             return redirect()->back()->with('error', 'Email or Password Incorrect!');
         }
-
         //simpen name, nim, role_id,image e user 
         session([
             'user_id' => Auth::id(),
@@ -58,7 +57,7 @@ class UserController extends Controller
             'role_id'   => $user->role->role_id,
             'image' => $user->image,
         ]);
-
+        
         ///if login success, then will go to home
         return redirect()->route('home')->with('message', 'Login successful!');
     }

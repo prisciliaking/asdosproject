@@ -10,63 +10,61 @@ use App\Models\AsdosAccept;
 use App\Models\KelasMataKuliah;
 use App\Models\MataKuliahAccept;
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
 
 Route::get('/', [UserController::class, 'showLoginRegisterForm'])->name('login');
 Route::post('/', [UserController::class, 'login'])->name('login');
-
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-
-Route::get('/users', [UserController::class, 'viewUsers'])->name('users');
-Route::get('/admins', [UserController::class, 'viewAdmins'])->name('admins');
-
-Route::get('/courses', [KelasMataKuliahController::class, 'index'])
-    ->name('courses.index');
-
-Route::get('/approved', [AsdosAcceptController::class, 'showAsdos'])
-    ->name('approved');
-
-Route::get('/approvedDetail', [AsdosAcceptController::class, 'index'])
-    ->name('approvedDetail');
-
-Route::get('/approvedDetail/{kelasId}', [AsdosAcceptController::class, 'showDetail'])->name('approvedDetail');
-
-Route::get('/user/accepted-courses', [AsdosAcceptController::class, 'getMyAssignments'])->name('studentApproval');
-
-
-
-
-Route::get('/addcourse', [KelasMataKuliahController::class, 'create'])->name('addCourse');
-Route::post('/addcourse', [KelasMataKuliahController::class, 'store'])->name('addCourse');
-
-
-// Route untuk menampilkan daftar kelas mata kuliah
-Route::get('/courses', [KelasMataKuliahController::class, 'index'])->name('courses.index');
-
-// Route untuk menampilkan detail kelas mata kuliah berdasarkan ID
-Route::get('/courses/{id}', [KelasMataKuliahController::class, 'show'])->name('courses.show');
-
-// Route untuk menampilkan form edit kelas mata kuliah
-Route::get('/courses/{id}/edit', [KelasMataKuliahController::class, 'edit'])->name('courses.edit');
-
-// Route untuk memperbarui data kelas mata kuliah
-Route::put('/courses/{id}', [KelasMataKuliahController::class, 'update'])->name('courses.update');
-
-// Route untuk menghapus kelas mata kuliah
-Route::delete('/courses/{id}', [KelasMataKuliahController::class, 'destroy'])->name('courses.destroy');
-
-
-
-
 //not used yet
 Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register.view');
 Route::post('/register', [UserController::class, 'register'])->name('register');
 
-Route::get('/addcourse', function () {
-    return view('addCourse');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/home', function () {
+        return view('home');
+    })->name('home');
+
+    Route::get('/users', [UserController::class, 'viewUsers'])->name('users');
+    Route::get('/admins', [UserController::class, 'viewAdmins'])->name('admins');
+
+    Route::get('/courses', [KelasMataKuliahController::class, 'index'])
+        ->name('courses.index');
+
+    Route::get('/approved', [AsdosAcceptController::class, 'showAsdos'])
+        ->name('approved');
+
+    Route::get('/approvedDetail', [AsdosAcceptController::class, 'index'])
+        ->name('approvedDetail');
+
+    Route::get('/approvedDetail/{kelasId}', [AsdosAcceptController::class, 'showDetail'])->name('approvedDetail');
+
+    Route::get('/user/accepted-courses', [AsdosAcceptController::class, 'getMyAssignments'])->name('studentApproval');
+
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+    Route::get('/addcourse', [KelasMataKuliahController::class, 'create'])->name('addCourse');
+    Route::post('/addcourse', [KelasMataKuliahController::class, 'store'])->name('addCourse');
+
+
+    // Route untuk menampilkan daftar kelas mata kuliah
+    Route::get('/courses', [KelasMataKuliahController::class, 'index'])->name('courses.index');
+
+    // Route untuk menampilkan detail kelas mata kuliah berdasarkan ID
+    Route::get('/courses/{id}', [KelasMataKuliahController::class, 'show'])->name('courses.show');
+
+    // Route untuk menampilkan form edit kelas mata kuliah
+    Route::get('/courses/{id}/edit', [KelasMataKuliahController::class, 'edit'])->name('courses.edit');
+
+    // Route untuk memperbarui data kelas mata kuliah
+    Route::put('/courses/{id}', [KelasMataKuliahController::class, 'update'])->name('courses.update');
+
+    // Route untuk menghapus kelas mata kuliah
+    Route::delete('/courses/{id}', [KelasMataKuliahController::class, 'destroy'])->name('courses.destroy');
+
+    Route::get('/addcourse', function () {
+        return view('addCourse');
+    });
 });
+
 
 
 
