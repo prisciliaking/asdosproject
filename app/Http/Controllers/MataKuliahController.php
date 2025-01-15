@@ -25,13 +25,14 @@ class MataKuliahController extends Controller
         }
 
         // Fetch associated Kelas Mata Kuliah with dosen details
-        $kelasDetails = KelasMataKuliah::where('matkul_id', $id)
+        $kelasdetail = KelasMataKuliah::where('matkul_id', $id)
             ->with('mataKuliahDosen.dosen') // Load MataKuliahDosen and Dosen details
             ->get();
 
         return response()->json([
             'mata_kuliah' => $matakuliah,
-            'kelas_details' => $kelasDetails
+            'kelas_details' => $kelasdetail
+        
         ]);
     }
 
