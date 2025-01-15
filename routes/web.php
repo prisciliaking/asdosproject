@@ -36,10 +36,10 @@ Route::get('/approved', [KelasMataKuliahController::class, 'approved'])
 Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register.view');
 Route::post('/register', [UserController::class, 'register'])->name('register');
 
-// Route::get('/addcourse', function () { return view('addCourse'); });
+Route::get('/addcourse', function () { return view('addCourse'); });
 
-// Route to show MataKuliah list and details
+// // Route to show MataKuliah list and details
 // Route::get('/courses', [MataKuliahController::class, 'index'])->name('courses.index');
 
-// // Route to fetch detailed Kelas Mata Kuliah data dynamically
+// // // Route to fetch detailed Kelas Mata Kuliah data dynamically
 // Route::get('/courses-details/{mata_kuliah_id}', [KelasMataKuliahController::class, 'showByMataKuliah'])->name('courses.details');

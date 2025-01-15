@@ -35,7 +35,7 @@ class MataKuliahController extends Controller
         
         ]);
     }
-}
+
 // Menambahkan data mata kuliah baru
     // public function store(Request $request)
     // {
@@ -87,3 +87,4 @@ class MataKuliahController extends Controller
 
     //     return response()->json(['message' => 'Mata Kuliah deleted successfully']);
     // }
+}
