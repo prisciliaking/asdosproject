@@ -5,6 +5,7 @@ use App\Http\Controllers\KelasMataKuliahController;
 use App\Http\Controllers\MataKuliahAcceptController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\UserController;
+use App\Models\KelasMataKuliah;
 use App\Models\MataKuliahAccept;
 
 Route::get('/home', function () {
@@ -21,6 +22,9 @@ Route::get('/admins', [UserController::class, 'viewAdmins'])->name('admins');
 
 Route::get('/courses', [KelasMataKuliahController::class, 'index'])
     ->name('courses.index');
+
+Route::get('/approved', [KelasMataKuliahController::class, 'approved'])
+    ->name('approved');
 
 
 

@@ -18,7 +18,7 @@
             <h1 class="mb-4 text-2xl font-bold">Courses</h1>
             <!-- Dropdown: Default placeholder with no selection -->
             <select id="semesterFilter" class="border border-gray-300 rounded py-2 px-3 w-64 text-black">
-                <option selected disabled>Semester</option>
+                <option value="">Semester</option>
                 <option value="ganjil">Semester Ganjil</option>
                 <option value="genap">Semester Genap</option>
             </select>
@@ -29,10 +29,10 @@
             @foreach ($courses as $course)
                 <div class="p-10 course-card bg-orange-100 rounded-lg shadow-md"
                     data-semester="{{ $course->kelas_semester }}">
-                    <h3 class="text-lg font-bold">{{ $course->kelas_nama }}</h3>
+                    <h3 class="text-lg font-bold">{{ $course->kelas_name }}</h3>
                     <p>Day: {{ $course->mata_kuliah_hari }}</p>
                     <p>Time: {{ $course->mata_kuliah_jam }}</p>
-                    <p>Lecturer: {{ $course->mataKuliahDosen->dosen->dosen_name ?? 'N/A' }}</p>
+                    <p>Lecturer: {{ $course->dosen->dosen_name ?? 'N/A' }}</p>
                     <p>Group Link: <a href="{{ $course->whats_app_link }}" target="_blank"
                             class="text-blue-500 underline">Join Group</a></p>
                 </div>
@@ -53,14 +53,14 @@
             const courses = document.querySelectorAll('.course-card');
 
             courses.forEach(course => {
-                // Get the semester of the course from the data attribute
                 const courseSemester = course.getAttribute('data-semester');
 
-                // Show or hide the course based on the selected semester
-                if (courseSemester === selectedSemester) {
-                    course.style.display = 'block';
+                if (selectedSemester === 'ganjil, genap' || selectedSemester === '') {
+                    course.style.display = 'block'; // Show all courses
+                } else if (courseSemester === selectedSemester) {
+                    course.style.display = 'block'; // Show matching courses
                 } else {
-                    course.style.display = 'none';
+                    course.style.display = 'none'; // Hide non-matching courses
                 }
             });
         });

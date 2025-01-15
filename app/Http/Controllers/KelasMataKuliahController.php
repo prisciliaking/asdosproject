@@ -9,7 +9,7 @@ class KelasMataKuliahController extends Controller
     public function index()
     {
         // Mengambil semua data kelas mata kuliah
-        $courses = KelasMataKuliah::with('mataKuliahDosen')->get();
+        $courses = KelasMataKuliah::with('Dosen', 'MataKuliah')->get();
 
         // Mengirim data ke view
         return view('courses', compact('courses'));

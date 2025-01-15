@@ -21,11 +21,11 @@
                     <div class="p-10 course-card bg-orange-100 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105"
                         data-semester="{{ $course->kelas_semester }}">
                         <a href="{{ route('course.details', ['id' => $course->kelas_id]) }}" class="block">
-                            <h3 class="text-lg font-bold text-gray-900">{{ $course->kelas_nama ?? 'N/A' }}</h3>
+                            <h3 class="text-lg font-bold text-gray-900">{{ $course->kelas_name ?? 'N/A' }}</h3>
                             <p class="text-gray-800">Day: {{ $course->mata_kuliah_hari ?? 'N/A' }}</p>
                             <p class="text-gray-800">Time: {{ $course->mata_kuliah_jam ?? 'N/A' }}</p>
                             <p class="text-gray-800">Lecturer:
-                                {{ $course->mataKuliahDosen->dosen->dosen_name ?? 'N/A' }}</p>
+                                {{ $course->dosen->dosen_name ?? 'N/A' }}</p>
                                 
                             <!-- Flexbox Container -->
                             <div class="flex items-center justify-center mt-2 space-x-1">
