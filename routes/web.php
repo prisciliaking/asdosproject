@@ -42,26 +42,33 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-    Route::get('/addcourse', [KelasMataKuliahController::class, 'create'])->name('addCourse');
-    Route::post('/addcourse', [KelasMataKuliahController::class, 'store'])->name('addCourse.store');
-
-    // Route to display the list of courses
+    Route::get('/addcourse', [KelasMataKuliahController::class, 'create'])->name('addCourse1');
+    Route::post('/addcourse', [KelasMataKuliahController::class, 'store'])->name('addCourse');
     Route::get('/courses', [KelasMataKuliahController::class, 'index'])->name('courses.index');
-
-    // Route to show course details by ID
     Route::get('/courses/{id}', [KelasMataKuliahController::class, 'show'])->name('courses.show');
-
-    // Route to display the edit form
     Route::get('/courses/{id}/edit', [KelasMataKuliahController::class, 'edit'])->name('courses.edit');
-
-    // Route to update the course
     Route::put('/courses/{id}', [KelasMataKuliahController::class, 'update'])->name('courses.update');
-
-    // Route to delete a course
     Route::delete('/courses/{id}', [KelasMataKuliahController::class, 'destroy'])->name('courses.destroy');
 
     Route::get('/registrasi-asdos', [RegistrasiAsdosController::class, 'create'])->name('registrasiAsdos.create');
     Route::post('/registrasi-asdos', [RegistrasiAsdosController::class, 'store'])->name('registrasiAsdos.store');
+
+    Route::get('/matakuliah', [MataKuliahController::class, 'index'])->name('matakuliah.index');
+    Route::post('/matakuliah', [MataKuliahController::class, 'store'])->name('matakuliah.store');
+    Route::patch('/mataKuliah/{id}/updateIsOpen', [MataKuliahController::class, 'updateIsOpen']);
+
+    Route::get('registrasiAsdos', [RegistrasiAsdosController::class, 'index'])->name('registrasiAsdos.index');
+    Route::get('/registeredAsdos/{mata_kuliah_id}', [RegistrasiAsdosController::class, 'showRegisteredAsdos'])->name('registeredAsdos');
+    Route::post('/registrasi-asdos/update-status', [RegistrasiAsdosController::class, 'updateStatus'])->name('registrasiAsdos.updateStatus');
+    Route::get('/registrasi-asdos/{mataKuliah}', [RegistrasiAsdosController::class, 'show'])->name('registrasiAsdos.show');
+
+
+    // Show the form for editing Mata Kuliah
+    // Route::get('/matakuliah/{id}/edit', [MataKuliahController::class, 'edit'])->name('mataKuliah.edit');
+
+    // Update the specified Mata Kuliah
+    // Route::put('/matakuliah/{id}', [MataKuliahController::class, 'update'])->name('mataKuliah.update');
+
 });
 
 

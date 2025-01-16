@@ -8,7 +8,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js']) <!-- Include Vite assets -->
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-50 min-h-screen flex flex-col">
     <!-- Navigation -->
     <x-navigation></x-navigation>
 
@@ -22,4 +22,5 @@
     </main>
     <x-footer></x-footer>
 </body>
+<x-footer></x-footer>
 </html>

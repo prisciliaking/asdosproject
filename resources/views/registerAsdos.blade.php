@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-gray-50">
+<body class="bg-gray-50 min-h-screen flex flex-col">
     <x-navigation></x-navigation>
     <div class="container mx-auto mt-10">
         <div class="bg-white p-8 rounded-lg shadow-xl border-t-8 border-orange-400">
@@ -48,8 +48,8 @@
             </form>
         </div>
     </div>
-
-    <x-footer></x-footer>
 </body>
+<x-footer></x-footer>
+
 
 </html>

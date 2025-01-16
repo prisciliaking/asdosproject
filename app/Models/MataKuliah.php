@@ -23,8 +23,12 @@ class MataKuliah extends Model
         'isOpen',
     ];
 
-    // Cast `is_deleted` to boolean
+    // Cast is_deleted to boolean
     protected $casts = [
         'isOpen' => 'boolean',
     ];
+    public function registrasiAsdos()
+    {
+        return $this->hasMany(RegistrasiAsdos::class, 'matkul_id');
+    }
 }

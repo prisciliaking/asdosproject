@@ -9,11 +9,15 @@ class KelasMataKuliah extends Model
 {
     // use HasFactory;
     public $timestamps = false;
-     
+
     // Specify the table name (optional if the table name follows Laravel's conventions)
     protected $table = 'kelas_mata_kuliahs';
 
     protected $primaryKey = 'kelas_id';
+
+    // Set primary key properties
+    public $incrementing = true; // Set to true if kelas_id is auto-incrementing
+    protected $keyType = 'int';  // Set to 'int' for integer primary keys
 
     protected $fillable = [
         'kelas_name',

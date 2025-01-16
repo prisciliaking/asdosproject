@@ -11,13 +11,7 @@ class MataKuliahController extends Controller
     public function index()
     {
         $mataKuliahs = MataKuliah::all();
-        return view('courses', compact('mataKuliahs'));
-    }
-
-    // Show the form for creating a new resource (if using views)
-    public function create()
-    {
-        return view('addCourse');
+        return view('viewMataKuliah', compact('mataKuliahs'));
     }
 
     // Store a newly created resource in storage
@@ -28,10 +22,13 @@ class MataKuliahController extends Controller
             'isOpen' => 'required|boolean',
         ]);
 
+        // Create the MataKuliah record
         $mataKuliah = MataKuliah::create($validatedData);
 
-        return response()->json(['message' => 'Mata kuliah created successfully', 'data' => $mataKuliah], 201);
+        // Redirect to the index page with success message
+        return redirect()->route('matakuliah.index')->with('success', 'Mata kuliah created successfully');
     }
+
 
     // Display the specified resource
     public function show($id)
@@ -45,36 +42,20 @@ class MataKuliahController extends Controller
         return response()->json($mataKuliah);
     }
 
-    // Show the form for editing the specified resource (if using views)
-    public function edit($id)
-    {
-        $mataKuliah = MataKuliah::find($id);
+    public function updateIsOpen(Request $request, $id)
+{
+    $mataKuliah = MataKuliah::find($id);
 
-        if (!$mataKuliah) {
-            return redirect()->route('mataKuliahs.index')->with('error', 'Mata kuliah not found');
-        }
-
-        return view('mata_kuliahs.edit', compact('mataKuliah'));
+    if (!$mataKuliah) {
+        return response()->json(['message' => 'Mata kuliah not found'], 404);
     }
 
-    // Update the specified resource in storage
-    public function update(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-            'matkul_name' => 'required|string|max:255',
-            'isOpen' => 'required|boolean',
-        ]);
+    // Update the isOpen field based on the incoming request
+    $mataKuliah->update(['isOpen' => $request->input('isOpen')]);
 
-        $mataKuliah = MataKuliah::find($id);
+    return response()->json(['success' => true]);
+}
 
-        if (!$mataKuliah) {
-            return response()->json(['message' => 'Mata kuliah not found'], 404);
-        }
-
-        $mataKuliah->update($validatedData);
-
-        return response()->json(['message' => 'Mata kuliah updated successfully', 'data' => $mataKuliah]);
-    }
 
     // Remove the specified resource from storage
     public function destroy($id)
@@ -82,11 +63,13 @@ class MataKuliahController extends Controller
         $mataKuliah = MataKuliah::find($id);
 
         if (!$mataKuliah) {
-            return response()->json(['message' => 'Mata kuliah not found'], 404);
+            return redirect()->route('mataKuliahs.index')->with('error', 'Mata kuliah not found');
         }
 
+        // Delete the Mata Kuliah record
         $mataKuliah->delete();
 
-        return response()->json(['message' => 'Mata kuliah deleted successfully']);
+        // Redirect with success message
+        return redirect()->route('mataKuliahs.index')->with('success', 'Mata kuliah deleted successfully');
     }
 }

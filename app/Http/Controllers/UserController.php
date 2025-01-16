@@ -71,13 +71,13 @@ class UserController extends Controller
         $request->session()->flush();
 
         // Redirect to login page
-        return redirect()->route('login')->with('message', 'You have been logged out.');
+        return redirect()->route('logout')->with('message', 'You have been logged out.');
     }
 
 
     public function showRegistrationForm()
     {
-        return view('register');
+        return view('signup');
     }
 
     //register

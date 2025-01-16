@@ -7,7 +7,7 @@
     <title>Admins List</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-50 min-h-screen flex flex-col">
     <x-navigation></x-navigation>
     <div class="container mx-auto p-4 mt-5">
         <h1 class="mb-4 text-2xl font-bold">Admins List</h1>
@@ -38,6 +38,6 @@
             </tbody>
         </table>
     </div>
-    <x-footer></x-footer>
 </body>
+<x-footer></x-footer>
 </html>

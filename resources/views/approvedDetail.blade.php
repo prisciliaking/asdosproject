@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body class="bg-gray-50 min-h-screen flex flex-col">
     <x-navigation></x-navigation>
 
     <main>
@@ -45,7 +45,7 @@
             </table>
         </div>
     </main>
-    <x-footer></x-footer>
 </body>
+<x-footer></x-footer>
 
 </html>

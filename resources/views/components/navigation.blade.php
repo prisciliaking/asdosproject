@@ -26,13 +26,14 @@
                         <!-- Admin-Specific Menu -->
                         <div class="hidden sm:flex space-x-4">
                             <a href="/courses"
-                                class="{{ request()->is('courses') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Courses</a>
+                                class="{{ request()->is('courses') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Classes</a>
                             <a href="/users"
                                 class="{{ request()->is('users') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Students</a>
                             <a href="/approved"
                                 class="{{ request()->is('approved') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Approved</a>
-                            <a href="/admins"
-                                class="{{ request()->is('admins') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Admin</a>
+                            <a href="{{ route('matakuliah.index') }}"
+                                class="{{ request()->is('admins') ? 'text-white' : 'text-gray-400 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Courses</a>
+                          
                         </div>
                     </div>
                 @else

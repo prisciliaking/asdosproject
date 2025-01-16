@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +11,7 @@ class RegistrasiAsdos extends Model
     // use HasFactory;
 
     protected $table = 'registrasi_asdos';
-    protected $primaryKey = 'regis_id';
+    protected $primaryKey = 'registrasi_id';
     public $timestamps = false;
 
     protected $fillable = [
@@ -32,4 +33,8 @@ class RegistrasiAsdos extends Model
     {
         return $this->belongsTo(Matakuliah::class, 'matkul_id');
     }
+    // public function kelas()
+    // {
+    //     return $this->belongsTo(KelasMataKuliah::class, 'kelas_id');
+    // }
 }

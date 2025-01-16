@@ -7,7 +7,11 @@ use App\Http\Controllers\MataKuliahController;
 use App\Models\MataKuliah;
 use App\Models\Dosen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
+use App\Models\AsdosAccept;
+use App\Models\RegistrasiAsdos;
 
 class KelasMataKuliahController extends Controller
 {
@@ -38,20 +42,25 @@ class KelasMataKuliahController extends Controller
     // Menyimpan kelas mata kuliah baru ke database
     public function store(Request $request)
     {
-        // Validate the input data
-        $validatedData = $request->validate([
-            'kelas_name' => 'required|string|max:255',
-            'mata_kuliah_hari' => 'required|string|max:255',
-            'mata_kuliah_jam' => 'required|string|max:255',
-            'whats_app_link' => 'nullable|url',
-            'kelas_semester' => 'required|string|max:255',
-            'matkul_id' => 'required|exists:mata_kuliahs,matkul_id',
-            'dosen_id' => 'required|exists:dosens,dosen_id',
-        ]);
-        Log::info('Validated Data:', $validatedData);
+        Log::info('Starting store function');
+        Log::info('Request data:', $request->all()); // Cek data yang diterima
 
         try {
-            // Create a new KelasMataKuliah record
+            DB::beginTransaction();
+
+            $validatedData = $request->validate([
+                'kelas_name' => 'required|string|max:255',
+                'mata_kuliah_hari' => 'required|string|max:255',
+                'mata_kuliah_jam' => 'required|string|max:255',
+                'whats_app_link' => 'nullable|url',
+                'kelas_semester' => 'required|string|max:255',
+                'matkul_id' => 'required|exists:mata_kuliahs,matkul_id',
+                'dosen_id' => 'required|exists:dosens,dosen_id',
+            ]);
+
+            Log::info('Validation passed', $validatedData); // Cek hasil validasi
+
+            // Buat instance baru dan set nilai secara eksplisit
             $kelasMataKuliah = new KelasMataKuliah();
             $kelasMataKuliah->kelas_name = $validatedData['kelas_name'];
             $kelasMataKuliah->mata_kuliah_hari = $validatedData['mata_kuliah_hari'];
@@ -61,119 +70,95 @@ class KelasMataKuliahController extends Controller
             $kelasMataKuliah->matkul_id = $validatedData['matkul_id'];
             $kelasMataKuliah->dosen_id = $validatedData['dosen_id'];
 
+            Log::info('Before saving', $kelasMataKuliah->toArray()); // Cek data sebelum disimpan
 
-            Log::info('Data yang akan disimpan:', [
-                'kelas_name' => $kelasMataKuliah->kelas_name,
-                'mata_kuliah_hari' => $kelasMataKuliah->mata_kuliah_hari,
-                'mata_kuliah_jam' => $kelasMataKuliah->mata_kuliah_jam,
-                'whats_app_link' => $kelasMataKuliah->whats_app_link,
-                'kelas_semester' => $kelasMataKuliah->kelas_semester,
-                'matkul_id' => $kelasMataKuliah->matkul_id,
-                'dosen_id' => $kelasMataKuliah->dosen_id
-            ]);            // Save the data to the database
-            $kelasMataKuliah->save();
-
-            // Redirect to the courses index page with success message
-            return redirect()->route('courses.index')->with('success', 'Kelas Mata Kuliah created successfully!');
+            if ($kelasMataKuliah->save()) {
+                Log::info('Data saved successfully');
+                DB::commit();
+                return redirect()->route('courses.index')
+                    ->with('success', 'Kelas Mata Kuliah created successfully!');
+            } else {
+                Log::error('Failed to save data');
+                DB::rollBack();
+                throw new \Exception('Failed to save data');
+            }
+        } catch (ValidationException $e) {
+            DB::rollBack();
+            Log::error('Validation failed:', [
+                'errors' => $e->errors(),
+                'request_data' => $request->all()
+            ]);
+            return back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
-            // Log the exception error message before returning the error response
-            Log::error('Error saat menyimpan data:', [
+            DB::rollBack();
+            Log::error('Error occurred:', [
                 'message' => $e->getMessage(),
-                'line' => $e->getLine(),
                 'file' => $e->getFile(),
+                'line' => $e->getLine(),
                 'trace' => $e->getTraceAsString()
-            ]);            // Catch any errors and return an error message
-            return back()->withErrors(['error' => 'Failed to create class: ' . $e->getMessage()]);
+            ]);
+            return back()
+                ->withInput()
+                ->withErrors(['error' => 'Failed to create class: ' . $e->getMessage()]);
         }
     }
-
-
 
     // Menampilkan detail kelas mata kuliah tertentu
     public function show($id)
     {
         // Mencari kelas mata kuliah berdasarkan ID dan memuat relasi
-        $kelasMataKuliah = KelasMataKuliah::with(['Dosen', 'MataKuliah'])->find($id);
+        $courses = KelasMataKuliah::with(['Dosen', 'MataKuliah'])->find($id);
 
-        if (!$kelasMataKuliah) {
+        if (!$courses) {
             return response()->json(['message' => 'Kelas Mata Kuliah not found'], 404);
         }
 
         // Mengembalikan data kelas mata kuliah
-        return response()->json($kelasMataKuliah);
+        return view('courses', compact('courses'));
     }
 
     // Menampilkan form untuk mengedit kelas mata kuliah
     public function edit($id)
     {
         // Mencari kelas mata kuliah berdasarkan ID
-        $kelasMataKuliah = KelasMataKuliah::find($id);
+        $courses = KelasMataKuliah::find($id);
         $mataKuliahs = MataKuliah::all();
         $dosens = Dosen::all();
 
-        if (!$kelasMataKuliah) {
+        if (!$courses) {
             return redirect()->route('kelasMataKuliahs.index')->with('error', 'Kelas Mata Kuliah not found');
         }
 
         // Mengirim data ke view edit
-        return view('kelas_mata_kuliahs.edit', compact('kelasMataKuliah', 'mataKuliahs', 'dosens'));
+        return view('editClassCourses', compact('courses', 'mataKuliahs', 'dosens'));
     }
+
 
     // Memperbarui data kelas mata kuliah
-    public function update(Request $request, $id)
+    public function updateStatus(Request $request)
     {
-        // Validasi data input
-        $validatedData = $request->validate([
-            'kelas_name' => 'required|string|max:255',
-            'mata_kuliah_hari' => 'required|string|max:255',
-            'mata_kuliah_jam' => 'required|string|max:255',
-            'whats_app_link' => 'nullable|url',
-            'kelas_semester' => 'required|string|max:255',
-            'matkul_id' => 'required|exists:mata_kuliahs,matkul_id',
-            'dosen_id' => 'required|exists:dosens,dosen_id',
+        $validated = $request->validate([
+            'status' => 'required|array',
+            'status.*' => 'in:waiting,approve,rejected',
+            'kelas_id' => 'nullable|array',
+            'kelas_id.*' => 'exists:kelas_mata_kuliah,id', // Validate kelas_id exists in KelasMataKuliah
         ]);
-
-        // Mencari kelas mata kuliah berdasarkan ID
-        $kelasMataKuliah = KelasMataKuliah::find($id);
-
-        if (!$kelasMataKuliah) {
-            return response()->json(['message' => 'Kelas Mata Kuliah not found'], 404);
+    
+        foreach ($request->status as $registrasiId => $status) {
+            $registrasi = RegistrasiAsdos::findOrFail($registrasiId);
+            $registrasi->status = $status;
+            $registrasi->save();
+    
+            // If status is 'approve' and kelas_id is provided
+            if ($status === 'approve' && isset($request->kelas_id[$registrasiId])) {
+                // Save into AsdosAccept with the user_id and kelas_id
+                AsdosAccept::create([
+                    'user_id' => $registrasi->user_id, // Take user_id from RegistrasiAsdos
+                    'kelas_id' => $request->kelas_id[$registrasiId], // Take kelas_id from the form
+                ]);
+            }
         }
-
-        // Memperbarui data
-        $kelasMataKuliah->update($validatedData);
-
-        // Mengembalikan response berhasil
-        return response()->json(['message' => 'Kelas Mata Kuliah updated successfully', 'data' => $kelasMataKuliah]);
+    
+        return redirect()->route('registrasiAsdos.index')->with('success', 'Status updated successfully!');
     }
-
-    // Menghapus kelas mata kuliah
-    public function destroy($id)
-    {
-        // Mencari kelas mata kuliah berdasarkan ID
-        $kelasMataKuliah = KelasMataKuliah::find($id);
-
-        if (!$kelasMataKuliah) {
-            return response()->json(['message' => 'Kelas Mata Kuliah not found'], 404);
-        }
-
-        // Menghapus data
-        $kelasMataKuliah->delete();
-
-        // Mengembalikan response berhasil
-        return response()->json(['message' => 'Kelas Mata Kuliah deleted successfully']);
     }
-}
-
-
-// public function showByMataKuliah($mata_kuliah_id)
-// {
-//     // Fetch all Kelas Mata Kuliah via matkul_dosen_id matching mata_kuliah_id
-//     $courses = KelasMataKuliah::whereHas('mataKuliahDosen', function ($query) use ($mata_kuliah_id) {
-//             $query->where('mata_kuliah_id', $mata_kuliah_id);
-//         })
-//         ->with('mataKuliahDosen.dosen') // Load MataKuliahDosen and associated Dosen
-//         ->get();
-
-//     return view('courses-Details', compact('courses'));
-// }
