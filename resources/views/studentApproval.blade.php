@@ -9,8 +9,33 @@
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
     <x-navigation></x-navigation>
-
-    <main class="p-6">
+    <form action="{{ route('updateAsdos') }}" method="POST">
+        @csrf
+    
+        @foreach ($registrasiAsdos as $registrasi)
+            <div>
+                <label for="status_{{ $registrasi->id }}">Status:</label>
+                <select name="status[{{ $registrasi->id }}]" id="status_{{ $registrasi->id }}">
+                    <option value="waiting" {{ $registrasi->status == 'waiting' ? 'selected' : '' }}>Waiting</option>
+                    <option value="approve" {{ $registrasi->status == 'approve' ? 'selected' : '' }}>Approve</option>
+                    <option value="reject" {{ $registrasi->status == 'reject' ? 'selected' : '' }}>Reject</option>
+                </select>
+            </div>
+    
+            <div>
+                <label for="kelas_id_{{ $registrasi->id }}">Kelas:</label>
+                <select name="kelas_id[{{ $registrasi->id }}]" id="kelas_id_{{ $registrasi->id }}">
+                    @foreach ($kelasMatakuliah as $kelas)
+                        <option value="{{ $kelas->id }}">{{ $kelas->kelas_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        @endforeach
+    
+        <button type="submit">Simpan</button>
+    </form>
+    
+    {{-- <main class="p-6">
         <div class="container">
             <h1 class="mb-4 text-2xl font-bold">Accepted Courses for </h1>
             @if ($acceptedCourses->isEmpty())
@@ -46,7 +71,7 @@
                 </table>
             @endif
         </div>
-    </main>
+    </main> --}}
 </body>
 <x-footer></x-footer>
 </html>

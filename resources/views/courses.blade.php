@@ -55,21 +55,6 @@
                     </div>
                 </a>
                 </div>
-
-                {{-- <a href="{{ route('registeredAsdos', ['mata_kuliah_id' => $course->matkul_id]) }}" class="block">
-                    <h3 class="text-lg font-bold text-gray-900">{{ $course->kelas_name ?? 'N/A' }}</h3>
-                    <p class="text-gray-800">Day: {{ $course->mata_kuliah_hari ?? 'N/A' }}</p>
-                    <p class="text-gray-800">Time: {{ $course->mata_kuliah_jam ?? 'N/A' }}</p>
-                    <p class="text-gray-800">Lecturer: {{ $course->dosen->dosen_name ?? 'N/A' }}</p>
-    
-                    <!-- Flexbox Container -->
-                    <div class="flex items-center justify-center mt-2 space-x-1">
-                        <span class="text-gray-800 font-medium">Group Link:</span>
-                        <a class="text-blue-500 underline" href="{{ $course->whats_app_link ?? 'N/A' }}" target="_blank">
-                            Join Group
-                        </a>
-                    </div>
-                </a> --}}
             @endforeach
         </div>
         </div>

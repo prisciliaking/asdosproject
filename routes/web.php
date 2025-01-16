@@ -57,7 +57,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/matakuliah', [MataKuliahController::class, 'store'])->name('matakuliah.store');
     Route::patch('/mataKuliah/{id}/updateIsOpen', [MataKuliahController::class, 'updateIsOpen']);
 
-    Route::get('registrasiAsdos', [RegistrasiAsdosController::class, 'index'])->name('registrasiAsdos.index');
     Route::get('/registeredAsdos/{mata_kuliah_id}', [RegistrasiAsdosController::class, 'showRegisteredAsdos'])->name('registeredAsdos');
     Route::post('/registrasi-asdos/update-status', [RegistrasiAsdosController::class, 'updateStatus'])->name('registrasiAsdos.updateStatus');
     Route::get('/registrasi-asdos/{mataKuliah}', [RegistrasiAsdosController::class, 'show'])->name('registrasiAsdos.show');

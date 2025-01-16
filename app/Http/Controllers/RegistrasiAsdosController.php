@@ -30,7 +30,7 @@ class RegistrasiAsdosController extends Controller
         $asdos = RegistrasiAsdos::all();
 
         // Return to the view with the data
-        return view('registeredAsdos', compact('asdos'));
+        return view('registeredAsdos', compact('asdos', 'kelasMatakuliah', 'mataKuliah'));
     }
 
     /**
@@ -97,6 +97,7 @@ class RegistrasiAsdosController extends Controller
                 app(AsdosAcceptController::class)->createAsdosAccept($userId, $kelasId);
             }
         }
+    
         // Redirect back with success message
         return redirect()->route('registrasiAsdos.index')->with('success', 'Status updated successfully');
     }
@@ -106,7 +107,7 @@ class RegistrasiAsdosController extends Controller
     /**
      * Show the registrations of Asdos for a specific MataKuliah.
      */
-    public function showRegisteredAsdos($matkulId)
+    public function     showRegisteredAsdos($matkulId)
     {
         // Fetch MataKuliah by ID
         $mataKuliah = MataKuliah::find($matkulId);

@@ -143,12 +143,12 @@ class KelasMataKuliahController extends Controller
             'kelas_id' => 'nullable|array',
             'kelas_id.*' => 'exists:kelas_mata_kuliah,id', // Validate kelas_id exists in KelasMataKuliah
         ]);
-
+    
         foreach ($request->status as $registrasiId => $status) {
             $registrasi = RegistrasiAsdos::findOrFail($registrasiId);
             $registrasi->status = $status;
             $registrasi->save();
-
+    
             // If status is 'approve' and kelas_id is provided
             if ($status === 'approve' && isset($request->kelas_id[$registrasiId])) {
                 // Save into AsdosAccept with the user_id and kelas_id
@@ -158,7 +158,7 @@ class KelasMataKuliahController extends Controller
                 ]);
             }
         }
-
+    
         return redirect()->route('registrasiAsdos.index')->with('success', 'Status updated successfully!');
     }
-}
+    }
