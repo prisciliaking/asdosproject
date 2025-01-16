@@ -97,7 +97,6 @@ class RegistrasiAsdosController extends Controller
                 app(AsdosAcceptController::class)->createAsdosAccept($userId, $kelasId);
             }
         }
-    
         // Redirect back with success message
         return redirect()->route('registrasiAsdos.index')->with('success', 'Status updated successfully');
     }

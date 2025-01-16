@@ -48,24 +48,21 @@
 
                             <!-- Class selection for approved -->
                             <div class="mt-2 class-selection" id="class-selection-{{ $registrasi->registrasi_id }}"
-    @if ($registrasi->status !== 'approve' && old("status.{$registrasi->registrasi_id}") !== 'approve') style="display: none;" @endif>
-    <label for="kelas_id_{{ $registrasi->registrasi_id }}">Assign to Class:</label>
-    <select name="kelas_id[{{ $registrasi->registrasi_id }}]"
-        id="kelas_id_{{ $registrasi->registrasi_id }}" class="bg-gray-100 p-2 rounded"
-        @if ($registrasi->status !== 'approve' && old("status.{$registrasi->registrasi_id}") !== 'approve') disabled @endif required>
-        <option value="">Select a Class</option>
+                                @if ($registrasi->status !== 'approve' && old("status.{$registrasi->registrasi_id}") !== 'approve') style="display: none;" @endif>
+                                <label for="kelas_id_{{ $registrasi->registrasi_id }}">Assign to Class:</label>
+                                <select name="kelas_id[{{ $registrasi->registrasi_id }}]"
+                                    id="kelas_id_{{ $registrasi->registrasi_id }}" class="bg-gray-100 p-2 rounded"
+                                    @if ($registrasi->status !== 'approve' && old("status.{$registrasi->registrasi_id}") !== 'approve') disabled @endif required>
+                                    <option value="">Select a Class</option>
 
-        @foreach ($kelasMatakuliah as $kelasItem)
-            <option value="{{ $kelasItem->id }}"
-                {{ old("kelas_id.{$registrasi->registrasi_id}", $registrasi->kelas_id) == $kelasItem->id ? 'selected' : '' }}>
-                {{ $kelasItem->kelas_name }}
-            </option>
-        @endforeach
-    </select>
-</div>
-
-
-
+                                    @foreach ($kelasMatakuliah as $kelasItem)
+                                        <option value="{{ $kelasItem->id }}"
+                                            {{ old("kelas_id.{$registrasi->registrasi_id}", $registrasi->kelas_id) == $kelasItem->id ? 'selected' : '' }}>
+                                            {{ $kelasItem->kelas_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     @endif
                 @endforeach
